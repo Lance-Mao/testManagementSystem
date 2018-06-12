@@ -1,0 +1,6 @@
+启动redis
+redis-server
+
+Eclipse、IDEA运行RenrenApplication.java，则可启动项目
+项目后端地址：http://localhost:8080/system
+Swagger路径：http://localhost:8080/system/swagger/index.html

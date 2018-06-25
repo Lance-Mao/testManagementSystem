@@ -1,6 +1,4 @@
 <template>
-<div>
-  
   <el-dialog
     :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
@@ -18,16 +16,19 @@
     <el-form-item label="上传者" prop="uploadBy">
       <el-input v-model="dataForm.uploadBy" placeholder="上传者"></el-input>
     </el-form-item>
+    <el-form-item label="试题分类">
+      <el-cascader
+    placeholder="试试搜索：指南"
+    :options="options"
+    filterable
+  ></el-cascader>
+    </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
       <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
     </span>
-      <div class="block">
-  
-</div>
   </el-dialog>
-</div>
 </template>
 
 <script>

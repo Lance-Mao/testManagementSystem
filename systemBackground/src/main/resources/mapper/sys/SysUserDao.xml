@@ -13,12 +13,29 @@
 	<!-- 查询用户的所有菜单ID --> 
 	<select id="queryAllMenuId" resultType="long">
 		select distinct rm.menu_id from sys_user_role ur 
-			LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id 
+		LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
 		where ur.user_id = #{userId}
 	</select>
 	
 	<select id="queryByUserName" resultType="io.renren.modules.sys.entity.SysUserEntity">
 		select * from sys_user where username = #{username}
+	</select>
+
+	<select id="selectPage" resultType="map" parameterType="map">
+		select u.email,u.mobile,u.create_time createTime,u.user_id userId,u.status,u.username,c.name college
+		from sys_user u
+		left join tb_school s on s.scid = u.college
+		left join tb_college c on c.coid = s.collegeID
+		<where>
+			<if test="page.username != ''">
+				u.username = #{page.username}
+			</if>
+		</where>
+		LIMIT #{page.page},#{page.limit}
+	</select>
+
+	<select id="selectTotalCount" resultType="int">
+		select count(1) from sys_user;
 	</select>
 
 </mapper>

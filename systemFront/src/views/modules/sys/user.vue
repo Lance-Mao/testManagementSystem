@@ -127,14 +127,14 @@
           url: this.$http.adornUrl('/sys/user/list'),
           method: 'get',
           params: this.$http.adornParams({
-            'page': this.pageIndex,
+            'page': this.pageIndex - 1,
             'limit': this.pageSize,
             'username': this.dataForm.userName
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
             this.dataList = data.page.list
-            console.log(this.dataList)
+            console.log(data.page, '分页信息')
             this.totalPage = data.page.totalCount
           } else {
             this.dataList = []

@@ -1,10 +1,13 @@
 package io.renren.modules.sys.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import io.renren.modules.sys.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 系统用户
@@ -32,4 +35,16 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
 	 */
 	SysUserEntity queryByUserName(String username);
 
+	/**
+	 * 分页查询用户信息改写
+	 * @param page
+	 * @return
+	 */
+    List<Map<String,Object>> selectPage(@Param("page") Map<String, Object> page);
+
+	/**
+	 * 查询总记录数
+	 * @return
+	 */
+	int selectTotalCount();
 }

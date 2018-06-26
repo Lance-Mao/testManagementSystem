@@ -15,7 +15,7 @@
       </el-form-item>
       <el-form-item label="高校" prop="college">
         <el-cascader :style="{width: '100%'}"
-          placeholder="试试搜索"
+          placeholder="搜索"
           :options="options"
           @active-item-change="handleItemChange"
           filterable
@@ -81,6 +81,13 @@
           callback()
         }
       }
+      var validateCollege = (rule, value, callback) => {
+        if (!this.dataForm.id && !/\S/.test(value)) {
+          callback(new Error('学校不能为空'))
+        } else {
+          callback()
+        }
+      }
       return {
         visible: false,
         roleList: [],
@@ -92,7 +99,7 @@
           salt: '',
           email: '',
           mobile: '',
-          college: '',
+          college: null,
           roleIdList: [],
           status: 1
         },
@@ -114,6 +121,10 @@
           mobile: [
             { required: true, message: '手机号不能为空', trigger: 'blur' },
             { validator: validateMobile, trigger: 'blur' }
+          ],
+          college: [
+            { required: true, message: '学校不能为空', trigger: 'blur' },
+            { validator: validateCollege, trigger: 'blur' }
           ]
         }
       }
@@ -154,6 +165,7 @@
                 this.dataForm.mobile = data.user.mobile
                 this.dataForm.roleIdList = data.user.roleIdList
                 this.dataForm.status = data.user.status
+                this.dataForm.college = data.user.college
               }
             })
           }
@@ -174,6 +186,7 @@
                 'email': this.dataForm.email,
                 'mobile': this.dataForm.mobile,
                 'status': this.dataForm.status,
+                'college': this.dataForm.college[2],
                 'roleIdList': this.dataForm.roleIdList
               })
             }).then(({data}) => {
@@ -195,6 +208,7 @@
         })
       },
       handleItemChange (e) {
+        _this.dataForm.college = e
         if (e.length === 1) {
           this.$http({
             url: this.$http.adornUrl(`/area/college/lists?id=${e[0]}`),
@@ -203,6 +217,7 @@
             _this.options.find(item => item.value === e[0]).children.push(...data.data.colleges)
           })
         } else if (e.length === 2) {
+          _this.dataForm.college = e
           this.$http({
             url: this.$http.adornUrl(`/area/school/lists?id=${e[1]}`),
             method: 'get'

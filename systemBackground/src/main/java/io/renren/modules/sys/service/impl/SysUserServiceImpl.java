@@ -1,6 +1,7 @@
 package io.renren.modules.sys.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import io.renren.common.exception.RRException;
@@ -36,20 +37,32 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	private SysUserRoleService sysUserRoleService;
 	@Autowired
 	private SysRoleService sysRoleService;
+	@Autowired
+	private SysUserDao sysUserDao;
 
 	@Override
 	public PageUtils queryPage(Map<String, Object> params) {
+		Map<String, Object> pageInfo = new HashMap<>();
 		String username = (String)params.get("username");
-		Long createUserId = (Long)params.get("createUserId");
+//		Long createUserId = Long.valueOf((String)params.get("createUserId"));
+		int page = Integer.valueOf((String) params.get("page"));
+		int limit = Integer.valueOf((String) params.get("limit"));
 
-		Page<SysUserEntity> page = this.selectPage(
-			new Query<SysUserEntity>(params).getPage(),
-			new EntityWrapper<SysUserEntity>()
-				.like(StringUtils.isNotBlank(username),"username", username)
-				.eq(createUserId != null,"create_user_id", createUserId)
-		);
+//		Page<SysUserEntity> page = this.selectPage(
+//			new Query<SysUserEntity>(params).getPage(),
+//			new EntityWrapper<SysUserEntity>()
+//				.like(StringUtils.isNotBlank(username),"username", username)
+//				.eq(createUserId != null,"create_user_id", createUserId)
+//		);
 
-		return new PageUtils(page);
+		pageInfo.put("username", username);
+		pageInfo.put("page", page);
+		pageInfo.put("limit", limit);
+
+		List<Map<String, Object>> userList = sysUserDao.selectPage(pageInfo);
+		int totalCount = sysUserDao.selectTotalCount();
+
+		return new PageUtils(userList,totalCount,limit,page);
 	}
 
 	@Override

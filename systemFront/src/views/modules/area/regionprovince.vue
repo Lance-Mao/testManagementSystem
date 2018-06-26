@@ -13,6 +13,7 @@
     <el-table
       :data="dataList"
       border
+      size = "mini"
       v-loading="dataListLoading"
       @selection-change="selectionChangeHandle"
       style="width: 100%;">

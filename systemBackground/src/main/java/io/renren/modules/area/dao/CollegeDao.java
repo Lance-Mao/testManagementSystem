@@ -4,6 +4,9 @@ import io.renren.modules.area.entity.CollegeEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 高校
  * 
@@ -13,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface CollegeDao extends BaseMapper<CollegeEntity> {
-	
+
+    List<Map<String,Object>> selectByProvinceId(int params);
 }

@@ -12,6 +12,7 @@
     </el-form>
     <el-table
       :data="dataList"
+      size = "mini"
       border
       v-loading="dataListLoading"
       @selection-change="selectionChangeHandle"

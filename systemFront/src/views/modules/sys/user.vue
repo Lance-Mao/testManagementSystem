@@ -36,6 +36,12 @@
         label="用户名">
       </el-table-column>
       <el-table-column
+        prop="college"
+        header-align="center"
+        align="center"
+        label="所属高校">
+      </el-table-column>
+      <el-table-column
         prop="email"
         header-align="center"
         align="center"
@@ -128,6 +134,7 @@
         }).then(({data}) => {
           if (data && data.code === 0) {
             this.dataList = data.page.list
+            console.log(this.dataList)
             this.totalPage = data.page.totalCount
           } else {
             this.dataList = []

@@ -13,6 +13,14 @@
       <el-form-item label="确认密码" prop="comfirmPassword" :class="{ 'is-required': !dataForm.id }">
         <el-input v-model="dataForm.comfirmPassword" type="password" placeholder="确认密码"></el-input>
       </el-form-item>
+      <el-form-item label="高校" prop="college">
+        <el-cascader :style="{width: '100%'}"
+          placeholder="试试搜索"
+          :options="options"
+          @active-item-change="handleItemChange"
+          filterable
+        ></el-cascader>
+      </el-form-item>
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
       </el-form-item>
@@ -40,6 +48,7 @@
 
 <script>
   import { isEmail, isMobile } from '@/utils/validate'
+  let _this
   export default {
     data () {
       var validatePassword = (rule, value, callback) => {
@@ -83,9 +92,11 @@
           salt: '',
           email: '',
           mobile: '',
+          college: '',
           roleIdList: [],
           status: 1
         },
+        options: [],
         dataRule: {
           userName: [
             { required: true, message: '用户名不能为空', trigger: 'blur' }
@@ -109,6 +120,7 @@
     },
     methods: {
       init (id) {
+        _this = this
         this.dataForm.id = id || 0
         this.$http({
           url: this.$http.adornUrl('/sys/role/select'),
@@ -116,6 +128,13 @@
           params: this.$http.adornParams()
         }).then(({data}) => {
           this.roleList = data && data.code === 0 ? data.list : []
+        }).then(() => {
+          this.$http({
+            url: this.$http.adornUrl('/area/regionprovince/lists'),
+            method: 'get'
+          }).then((data) => {
+            data.code !== 0 ? _this.options.push(...data.data.province) : _this.options.push([])
+          })
         }).then(() => {
           this.visible = true
           this.$nextTick(() => {
@@ -174,6 +193,23 @@
             })
           }
         })
+      },
+      handleItemChange (e) {
+        if (e.length === 1) {
+          this.$http({
+            url: this.$http.adornUrl(`/area/college/lists?id=${e[0]}`),
+            method: 'get'
+          }).then((data) => {
+            _this.options.find(item => item.value === e[0]).children.push(...data.data.colleges)
+          })
+        } else if (e.length === 2) {
+          this.$http({
+            url: this.$http.adornUrl(`/area/school/lists?id=${e[1]}`),
+            method: 'get'
+          }).then((data) => {
+            _this.options.find(item => item.value === e[0]).children.find(item => item.value === e[1]).children.push(...data.data.schools)
+          })
+        }
       }
     }
   }

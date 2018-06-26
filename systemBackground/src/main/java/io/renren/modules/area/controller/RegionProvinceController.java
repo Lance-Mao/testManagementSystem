@@ -1,6 +1,7 @@
 package io.renren.modules.area.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -40,6 +41,18 @@ public class RegionProvinceController {
         PageUtils page = regionProvinceService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 查询全部数据
+     * @return
+     */
+    @RequestMapping("/lists")
+    @RequiresPermissions("area:regionprovince:list")
+    public R lists(){
+        List<Map<String,Object>> province = regionProvinceService.selectAll();
+
+        return R.ok().put("province", province);
     }
 
 

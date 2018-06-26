@@ -80,6 +80,11 @@ public class SysUserEntity implements Serializable {
 	private Date createTime;
 
 	/**
+	 * 用户所属高校
+	 */
+	private Long college;
+
+	/**
 	 * 设置：
 	 * @param userId 
 	 */
@@ -213,5 +218,13 @@ public class SysUserEntity implements Serializable {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	public Long getCollege() {
+		return college;
+	}
+
+	public void setCollege(Long college) {
+		this.college = college;
 	}
 }

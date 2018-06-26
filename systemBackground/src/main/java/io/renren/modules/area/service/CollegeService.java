@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import io.renren.common.utils.PageUtils;
 import io.renren.modules.area.entity.CollegeEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface CollegeService extends IService<CollegeEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<Map<String,Object>> selectByProvinceId(Integer params);
 }
 

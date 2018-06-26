@@ -10,5 +10,8 @@
         <result property="provinceid" column="provinceID"/>
     </resultMap>
 
+    <select id="selectByProvinceId" parameterType="int" resultType="map">
+        select c.name label,c.coid value from tb_college c where c.provinceID = #{params};
+    </select>
 
 </mapper>

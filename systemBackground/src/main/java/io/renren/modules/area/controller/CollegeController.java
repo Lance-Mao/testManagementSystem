@@ -1,6 +1,7 @@
 package io.renren.modules.area.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -40,6 +41,14 @@ public class CollegeController {
         PageUtils page = collegeService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    @RequestMapping("/lists")
+    @RequiresPermissions("area:college:list")
+    public R lists(@RequestParam Integer id){
+        List<Map<String,Object>> colleges = collegeService.selectByProvinceId(id);
+
+        return R.ok().put("colleges", colleges);
     }
 
 

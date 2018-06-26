@@ -4,6 +4,9 @@ import io.renren.modules.area.entity.RegionProvinceEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 省份
  * 
@@ -13,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface RegionProvinceDao extends BaseMapper<RegionProvinceEntity> {
-	
+
+    List<Map<String,Object>> selectAll();
 }

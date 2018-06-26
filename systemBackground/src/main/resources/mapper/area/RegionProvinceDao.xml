@@ -10,5 +10,9 @@
         <result property="pname" column="pname"/>
     </resultMap>
 
+    <select id="selectAll" resultType="map">
+        select p.pname label,p.provinceID value from tb_region_province p;
+    </select>
+
 
 </mapper>

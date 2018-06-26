@@ -85,6 +85,15 @@ public class SysUserEntity implements Serializable {
 	private Long college;
 
 	/**
+	 * 学院
+	 */
+	private Long school;
+	/**
+	 * 省份
+	 */
+	private Long province;
+
+	/**
 	 * 设置：
 	 * @param userId 
 	 */
@@ -226,5 +235,21 @@ public class SysUserEntity implements Serializable {
 
 	public void setCollege(Long college) {
 		this.college = college;
+	}
+
+	public Long getSchool() {
+		return school;
+	}
+
+	public void setSchool(Long school) {
+		this.school = school;
+	}
+
+	public Long getProvince() {
+		return province;
+	}
+
+	public void setProvince(Long province) {
+		this.province = province;
 	}
 }

@@ -22,10 +22,12 @@
 	</select>
 
 	<select id="selectPage" resultType="map" parameterType="map">
-		select u.email,u.mobile,u.create_time createTime,u.user_id userId,u.status,u.username,c.name college
+		select u.email,u.mobile,u.create_time createTime,u.user_id userId,u.status,u.username,c.name college,
+		c.coid cValue, s.name shool,s.scid sValue,p.pname province,p.provinceID pValue
 		from sys_user u
-		left join tb_school s on s.scid = u.college
+		left join tb_school s on s.scid = u.school
 		left join tb_college c on c.coid = s.collegeID
+		left join tb_region_province p on p.provinceID = c.provinceID
 		<where>
 			<if test="page.username != ''">
 				u.username = #{page.username}

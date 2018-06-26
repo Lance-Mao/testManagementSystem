@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.questionManagement.dao.QuestionCourseTitleDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.questionManagement.entity.QuestionCourseTitleEntity" id="questionCourseTitleMap">
+        <result property="id" column="id"/>
+        <result property="courseTitle" column="course_title"/>
+    </resultMap>
+
+    <select id="selectAll" resultType="map">
+        select ct.id value,ct.course_title label from question_course_title ct;
+    </select>
+
+</mapper>

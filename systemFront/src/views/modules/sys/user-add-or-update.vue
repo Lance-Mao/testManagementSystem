@@ -19,6 +19,7 @@
           :options="options"
           @active-item-change="handleItemChange"
           filterable
+          v-model="dataForm.college"
         ></el-cascader>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
@@ -144,7 +145,7 @@
             url: this.$http.adornUrl('/area/regionprovince/lists'),
             method: 'get'
           }).then((data) => {
-            data.code !== 0 ? _this.options.push(...data.data.province) : _this.options.push([])
+            data.data.code === 0 ? _this.options.push(...data.data.province) : _this.options.push([])
           })
         }).then(() => {
           this.visible = true
@@ -165,7 +166,7 @@
                 this.dataForm.mobile = data.user.mobile
                 this.dataForm.roleIdList = data.user.roleIdList
                 this.dataForm.status = data.user.status
-                this.dataForm.college = data.user.college
+                this.dataForm.college = [data.user.province, data.user.college, data.user.school]
               }
             })
           }
@@ -186,7 +187,9 @@
                 'email': this.dataForm.email,
                 'mobile': this.dataForm.mobile,
                 'status': this.dataForm.status,
-                'college': this.dataForm.college[2],
+                'school': this.dataForm.college[2],
+                'college': this.dataForm.college[1],
+                'province': this.dataForm.college[0],
                 'roleIdList': this.dataForm.roleIdList
               })
             }).then(({data}) => {
@@ -208,7 +211,6 @@
         })
       },
       handleItemChange (e) {
-        _this.dataForm.college = e
         if (e.length === 1) {
           this.$http({
             url: this.$http.adornUrl(`/area/college/lists?id=${e[0]}`),

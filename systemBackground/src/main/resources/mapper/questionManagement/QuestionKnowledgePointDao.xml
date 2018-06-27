@@ -17,7 +17,9 @@
         left join question_course_title qct on qct.id = qkp.course_title_id
         <where>
             <if test="pageInfo.key != '' ">
-                qkp.knowledge_point = #{pageInfo.key}
+                qkp.knowledge_point = #{pageInfo.key} or
+                qct.course_title = #{pageInfo.key} or
+                su.username = #{pageInfo.key}
             </if>
         </where>
         LIMIT #{pageInfo.page},#{pageInfo.limit}

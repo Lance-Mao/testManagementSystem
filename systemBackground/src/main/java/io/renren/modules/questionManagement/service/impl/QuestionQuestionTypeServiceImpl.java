@@ -1,5 +1,6 @@
 package io.renren.modules.questionManagement.service.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -18,9 +19,11 @@ public class QuestionQuestionTypeServiceImpl extends ServiceImpl<QuestionQuestio
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+        String key = (String) params.get("key");
         Page<QuestionQuestionTypeEntity> page = this.selectPage(
                 new Query<QuestionQuestionTypeEntity>(params).getPage(),
                 new EntityWrapper<QuestionQuestionTypeEntity>()
+                        .like(StringUtils.isNotBlank(key), "question_type", key)
         );
 
         return new PageUtils(page);

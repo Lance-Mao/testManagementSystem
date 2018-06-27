@@ -7,9 +7,6 @@
     <el-form-item label="题型名称" prop="questionType">
       <el-input v-model="dataForm.questionType" placeholder="题型名称"></el-input>
     </el-form-item>
-    <el-form-item label="知识点id" prop="knowledgePointId">
-      <el-input v-model="dataForm.knowledgePointId" placeholder="知识点id"></el-input>
-    </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -23,17 +20,14 @@
     data () {
       return {
         visible: false,
+        options: [],
         dataForm: {
           id: 0,
-          questionType: '',
-          knowledgePointId: ''
+          questionType: ''
         },
         dataRule: {
           questionType: [
             { required: true, message: '题型名称不能为空', trigger: 'blur' }
-          ],
-          knowledgePointId: [
-            { required: true, message: '知识点id不能为空', trigger: 'blur' }
           ]
         }
       }
@@ -52,7 +46,6 @@
             }).then(({data}) => {
               if (data && data.code === 0) {
                 this.dataForm.questionType = data.questionquestiontype.questionType
-                this.dataForm.knowledgePointId = data.questionquestiontype.knowledgePointId
               }
             })
           }
@@ -67,8 +60,7 @@
               method: 'post',
               data: this.$http.adornData({
                 'id': this.dataForm.id || undefined,
-                'questionType': this.dataForm.questionType,
-                'knowledgePointId': this.dataForm.knowledgePointId
+                'questionType': this.dataForm.questionType
               })
             }).then(({data}) => {
               if (data && data.code === 0) {

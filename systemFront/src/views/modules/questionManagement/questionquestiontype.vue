@@ -2,7 +2,7 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+        <el-input v-model="dataForm.key" placeholder="题型名称" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -26,19 +26,13 @@
         prop="id"
         header-align="center"
         align="center"
-        label="题型id">
+        label="id">
       </el-table-column>
       <el-table-column
         prop="questionType"
         header-align="center"
         align="center"
         label="题型名称">
-      </el-table-column>
-      <el-table-column
-        prop="knowledgePointId"
-        header-align="center"
-        align="center"
-        label="知识点id">
       </el-table-column>
       <el-table-column
         fixed="right"

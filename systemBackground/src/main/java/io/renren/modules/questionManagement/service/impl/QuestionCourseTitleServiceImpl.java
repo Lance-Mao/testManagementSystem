@@ -1,5 +1,6 @@
 package io.renren.modules.questionManagement.service.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,11 @@ public class QuestionCourseTitleServiceImpl extends ServiceImpl<QuestionCourseTi
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+        String key = (String) params.get("key");
         Page<QuestionCourseTitleEntity> page = this.selectPage(
                 new Query<QuestionCourseTitleEntity>(params).getPage(),
                 new EntityWrapper<QuestionCourseTitleEntity>()
+                        .like(StringUtils.isNotBlank(key), "course_title", key)
         );
 
         return new PageUtils(page);

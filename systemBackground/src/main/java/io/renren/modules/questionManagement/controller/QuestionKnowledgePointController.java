@@ -3,6 +3,7 @@ package io.renren.modules.questionManagement.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import io.renren.common.utils.ShiroUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,6 @@ import io.renren.modules.questionManagement.entity.QuestionKnowledgePointEntity;
 import io.renren.modules.questionManagement.service.QuestionKnowledgePointService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
-
 
 
 /**
@@ -36,7 +36,7 @@ public class QuestionKnowledgePointController {
      */
     @RequestMapping("/list")
     @RequiresPermissions("questionManagement:questionknowledgepoint:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = questionKnowledgePointService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -48,8 +48,8 @@ public class QuestionKnowledgePointController {
      */
     @RequestMapping("/info/{id}")
     @RequiresPermissions("questionManagement:questionknowledgepoint:info")
-    public R info(@PathVariable("id") Long id){
-			QuestionKnowledgePointEntity questionKnowledgePoint = questionKnowledgePointService.selectById(id);
+    public R info(@PathVariable("id") Long id) {
+        QuestionKnowledgePointEntity questionKnowledgePoint = questionKnowledgePointService.selectById(id);
 
         return R.ok().put("questionKnowledgePoint", questionKnowledgePoint);
     }
@@ -59,8 +59,9 @@ public class QuestionKnowledgePointController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("questionManagement:questionknowledgepoint:save")
-    public R save(@RequestBody QuestionKnowledgePointEntity questionKnowledgePoint){
-			questionKnowledgePointService.insert(questionKnowledgePoint);
+    public R save(@RequestBody QuestionKnowledgePointEntity questionKnowledgePoint) {
+        questionKnowledgePoint.setCreator(ShiroUtils.getUserId());
+        questionKnowledgePointService.insert(questionKnowledgePoint);
 
         return R.ok();
     }
@@ -70,8 +71,8 @@ public class QuestionKnowledgePointController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("questionManagement:questionknowledgepoint:update")
-    public R update(@RequestBody QuestionKnowledgePointEntity questionKnowledgePoint){
-			questionKnowledgePointService.updateById(questionKnowledgePoint);
+    public R update(@RequestBody QuestionKnowledgePointEntity questionKnowledgePoint) {
+        questionKnowledgePointService.updateById(questionKnowledgePoint);
 
         return R.ok();
     }
@@ -81,8 +82,8 @@ public class QuestionKnowledgePointController {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("questionManagement:questionknowledgepoint:delete")
-    public R delete(@RequestBody Long[] ids){
-			questionKnowledgePointService.deleteBatchIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        questionKnowledgePointService.deleteBatchIds(Arrays.asList(ids));
 
         return R.ok();
     }

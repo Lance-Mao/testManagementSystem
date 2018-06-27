@@ -48,13 +48,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		int page = Integer.valueOf((String) params.get("page"));
 		int limit = Integer.valueOf((String) params.get("limit"));
 
-//		Page<SysUserEntity> page = this.selectPage(
-//			new Query<SysUserEntity>(params).getPage(),
-//			new EntityWrapper<SysUserEntity>()
-//				.like(StringUtils.isNotBlank(username),"username", username)
-//				.eq(createUserId != null,"create_user_id", createUserId)
-//		);
-
 		pageInfo.put("username", username);
 		pageInfo.put("page", page);
 		pageInfo.put("limit", limit);

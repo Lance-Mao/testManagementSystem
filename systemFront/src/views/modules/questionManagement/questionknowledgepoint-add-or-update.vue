@@ -4,15 +4,13 @@
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-      <el-form-item label="课程" prop="courseTitleId">
-      <el-input v-model="dataForm.courseTitleId" placeholder="课程"></el-input>
-    </el-form-item>
-    <el-form-item>
+    <el-form-item label="课程" prop="courseTitleId">
       <el-cascader :style="{width: '100%'}"
-          placeholder="搜索"
+          placeholder="课程"
           :options="options"
           @active-item-change="handleItemChange"
           filterable
+          v-model="dataForm.courseTitleId"
         ></el-cascader>
     </el-form-item>
     <el-form-item label="知识点" prop="knowledgePoint">
@@ -36,7 +34,7 @@
         dataForm: {
           id: 0,
           knowledgePoint: '',
-          courseTitleId: ''
+          courseTitleId: null
         },
         dataRule: {
           knowledgePoint: [
@@ -51,6 +49,8 @@
     methods: {
       init (id) {
         _this = this
+        // 清空数组，避免连续拼接
+        this.options = []
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -70,8 +70,9 @@
               params: this.$http.adornParams()
             }).then(({data}) => {
               if (data && data.code === 0) {
-                this.dataForm.knowledgePoint = data.questionknowledgepoint.knowledgePoint
-                this.dataForm.courseTitleId = data.questionknowledgepoint.courseTitleId
+                console.log(data)
+                this.dataForm.knowledgePoint = data.questionKnowledgePoint.knowledgePoint
+                this.dataForm.courseTitleId = [data.questionKnowledgePoint.courseTitleId]
               }
             })
           }
@@ -87,7 +88,7 @@
               data: this.$http.adornData({
                 'id': this.dataForm.id || undefined,
                 'knowledgePoint': this.dataForm.knowledgePoint,
-                'courseTitleId': this.dataForm.courseTitleId
+                'courseTitleId': this.dataForm.courseTitleId[0]
               })
             }).then(({data}) => {
               if (data && data.code === 0) {
@@ -108,7 +109,7 @@
         })
       },
       handleItemChange (e) {
-        console.log(e)
+        _this.dataForm.courseTitleId = e
       }
     }
   }

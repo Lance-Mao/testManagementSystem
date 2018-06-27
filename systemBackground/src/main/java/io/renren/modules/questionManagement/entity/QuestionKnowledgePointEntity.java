@@ -32,6 +32,11 @@ public class QuestionKnowledgePointEntity implements Serializable {
 	private Integer courseTitleId;
 
 	/**
+	 * 创建者
+	 */
+	private Long creator;
+
+	/**
 	 * 设置：知识点id
 	 */
 	public void setId(Long id) {
@@ -66,5 +71,13 @@ public class QuestionKnowledgePointEntity implements Serializable {
 	 */
 	public Integer getCourseTitleId() {
 		return courseTitleId;
+	}
+
+	public Long getCreator() {
+		return creator;
+	}
+
+	public void setCreator(Long creator) {
+		this.creator = creator;
 	}
 }

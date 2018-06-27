@@ -133,6 +133,8 @@
     methods: {
       init (id) {
         _this = this
+        // 清空数组，避免连续拼接
+        this.options = []
         this.dataForm.id = id || 0
         this.$http({
           url: this.$http.adornUrl('/sys/role/select'),

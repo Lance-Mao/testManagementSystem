@@ -1,7 +1,13 @@
 package io.renren.modules.questionManagement.service.impl;
 
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -16,14 +22,29 @@ import io.renren.modules.questionManagement.service.QuestionKnowledgePointServic
 @Service("questionKnowledgePointService")
 public class QuestionKnowledgePointServiceImpl extends ServiceImpl<QuestionKnowledgePointDao, QuestionKnowledgePointEntity> implements QuestionKnowledgePointService {
 
+    @Autowired
+    private QuestionKnowledgePointDao questionKnowledgePointDao;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        Page<QuestionKnowledgePointEntity> page = this.selectPage(
-                new Query<QuestionKnowledgePointEntity>(params).getPage(),
-                new EntityWrapper<QuestionKnowledgePointEntity>()
-        );
+        Map<String, Object> pageInfo = new HashMap<>();
+        String key = (String) params.get("key");
 
-        return new PageUtils(page);
+        int page = Integer.valueOf((String) params.get("page"));
+        int limit = Integer.valueOf((String) params.get("limit"));
+
+        if (StringUtils.isNotBlank(key)) {
+            pageInfo.put("key", key);
+        }else {
+            pageInfo.put("key", "");
+        }
+        pageInfo.put("page", page);
+        pageInfo.put("limit", limit);
+
+        List<Map<String, Object>> list = questionKnowledgePointDao.selectPage(pageInfo);
+        int totalCount = questionKnowledgePointDao.selectTotalCount();
+
+        return new PageUtils(list, totalCount, limit, page);
     }
 
 }

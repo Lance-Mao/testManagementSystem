@@ -2,7 +2,7 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+        <el-input v-model="dataForm.key" placeholder="知识点名称" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -26,7 +26,7 @@
         prop="id"
         header-align="center"
         align="center"
-        label="知识点id">
+        label="id">
       </el-table-column>
       <el-table-column
         prop="knowledgePoint"
@@ -38,7 +38,13 @@
         prop="courseTitleId"
         header-align="center"
         align="center"
-        label="课程名称id">
+        label="课程名称">
+      </el-table-column>
+      <el-table-column
+        prop="creator"
+        header-align="center"
+        align="center"
+        label="创建者">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -75,7 +81,7 @@
           key: ''
         },
         dataList: [],
-        pageIndex: 1,
+        pageIndex: 0,
         pageSize: 10,
         totalPage: 0,
         dataListLoading: false,
@@ -103,6 +109,7 @@
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
+            console.log(data)
             this.dataList = data.page.list
             this.totalPage = data.page.totalCount
           } else {

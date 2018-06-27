@@ -3,6 +3,10 @@ package io.renren.modules.questionManagement.dao;
 import io.renren.modules.questionManagement.entity.QuestionKnowledgePointEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 知识点
@@ -13,5 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface QuestionKnowledgePointDao extends BaseMapper<QuestionKnowledgePointEntity> {
-	
+
+    List<Map<String,Object>> selectPage(@Param("pageInfo") Map<String,Object> pageInfo);
+
+    int selectTotalCount();
 }

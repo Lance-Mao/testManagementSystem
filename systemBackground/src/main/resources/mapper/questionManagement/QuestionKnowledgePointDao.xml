@@ -10,5 +10,21 @@
         <result property="courseTitleId" column="course_title_id"/>
     </resultMap>
 
+    <select id="selectPage" parameterType="map" resultType="map">
+        select qkp.id,qkp.knowledge_point knowledgePoint,su.username creator,qct.course_title courseTitleId
+        from question_knowledge_point qkp
+        left join sys_user su on su.user_id = qkp.creator
+        left join question_course_title qct on qct.id = qkp.course_title_id
+        <where>
+            <if test="pageInfo.key != '' ">
+                qkp.knowledge_point = #{pageInfo.key}
+            </if>
+        </where>
+        LIMIT #{pageInfo.page},#{pageInfo.limit}
+    </select>
+    
+    <select id="selectTotalCount" resultType="int">
+        select count(1) from question_knowledge_point;
+    </select>
 
 </mapper>

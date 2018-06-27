@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.questionManagement.dao.QuestionQuestionBankDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.questionManagement.entity.QuestionQuestionBankEntity" id="questionQuestionBankMap">
+        <result property="id" column="id"/>
+        <result property="courseTitleId" column="course_title_id"/>
+        <result property="knowledgeTitleId" column="knowledge_title_id"/>
+        <result property="questionTypeId" column="question_type_id"/>
+        <result property="enterer" column="enterer"/>
+        <result property="entryTime" column="entry_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="titleDescription" column="title_description"/>
+        <result property="answer" column="answer"/>
+        <result property="answerA" column="answer_a"/>
+        <result property="answerB" column="answer_b"/>
+        <result property="answerC" column="answer_c"/>
+        <result property="answerD" column="answer_d"/>
+        <result property="answerE" column="answer_e"/>
+        <result property="answerF" column="answer_f"/>
+    </resultMap>
+
+
+</mapper>

@@ -27,17 +27,21 @@ public class QuestionPaperEntity implements Serializable {
 	 */
 	private String documentType;
 	/**
-	 * 试题类型
-	 */
-	private String questionType;
-	/**
 	 * 上传地址
 	 */
 	private String uploadAddress;
 	/**
+	 * 课程名称
+	 */
+	private int courseTitleId;
+	/**
+	 * 知识点
+	 */
+	private Long knowledgePointId;
+	/**
 	 * 上传者
 	 */
-	private String uploadBy;
+	private Long uploadBy;
 	/**
 	 * 上传时间
 	 */
@@ -68,18 +72,6 @@ public class QuestionPaperEntity implements Serializable {
 		return documentType;
 	}
 	/**
-	 * 设置：试题类型
-	 */
-	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
-	}
-	/**
-	 * 获取：试题类型
-	 */
-	public String getQuestionType() {
-		return questionType;
-	}
-	/**
 	 * 设置：上传地址
 	 */
 	public void setUploadAddress(String uploadAddress) {
@@ -92,18 +84,6 @@ public class QuestionPaperEntity implements Serializable {
 		return uploadAddress;
 	}
 	/**
-	 * 设置：上传者
-	 */
-	public void setUploadBy(String uploadBy) {
-		this.uploadBy = uploadBy;
-	}
-	/**
-	 * 获取：上传者
-	 */
-	public String getUploadBy() {
-		return uploadBy;
-	}
-	/**
 	 * 设置：上传时间
 	 */
 	public void setUploadTime(Date uploadTime) {
@@ -114,5 +94,29 @@ public class QuestionPaperEntity implements Serializable {
 	 */
 	public Date getUploadTime() {
 		return uploadTime;
+	}
+
+	public int getCourseTitleId() {
+		return courseTitleId;
+	}
+
+	public void setCourseTitleId(int courseTitleId) {
+		this.courseTitleId = courseTitleId;
+	}
+
+	public Long getKnowledgePointId() {
+		return knowledgePointId;
+	}
+
+	public void setKnowledgePointId(Long knowledgePointId) {
+		this.knowledgePointId = knowledgePointId;
+	}
+
+	public Long getUploadBy() {
+		return uploadBy;
+	}
+
+	public void setUploadBy(Long uploadBy) {
+		this.uploadBy = uploadBy;
 	}
 }

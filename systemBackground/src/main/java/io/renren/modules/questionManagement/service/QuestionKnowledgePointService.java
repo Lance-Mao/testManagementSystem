@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import io.renren.common.utils.PageUtils;
 import io.renren.modules.questionManagement.entity.QuestionKnowledgePointEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface QuestionKnowledgePointService extends IService<QuestionKnowledgePointEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<Map<String,Object>> selectByCourseTitleId(Map<String,Object> params);
 }
 

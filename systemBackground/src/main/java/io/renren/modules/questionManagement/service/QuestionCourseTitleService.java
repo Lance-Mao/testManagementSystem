@@ -18,6 +18,6 @@ public interface QuestionCourseTitleService extends IService<QuestionCourseTitle
 
     PageUtils queryPage(Map<String, Object> params);
 
-    List<Map<String,Object>> selectAll();
+    List<Map<String,Object>> selectAll(Map<String, Object> params);
 }
 

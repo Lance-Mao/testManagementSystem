@@ -1,29 +1,30 @@
 package io.renren.modules.questionManagement.service.impl;
 
-import org.springframework.stereotype.Service;
-import java.util.Map;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import io.renren.common.utils.PageUtils;
-import io.renren.common.utils.Query;
-
 import io.renren.modules.questionManagement.dao.QuestionPaperDao;
 import io.renren.modules.questionManagement.entity.QuestionPaperEntity;
 import io.renren.modules.questionManagement.service.QuestionPaperService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 
 @Service("questionPaperService")
 public class QuestionPaperServiceImpl extends ServiceImpl<QuestionPaperDao, QuestionPaperEntity> implements QuestionPaperService {
 
+    @Autowired
+    private QuestionPaperDao questionPaperDao;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        Page<QuestionPaperEntity> page = this.selectPage(
-                new Query<QuestionPaperEntity>(params).getPage(),
-                new EntityWrapper<>()
-        );
+        Map<String, Object> pageInfo = PageUtils.getPageInfo(params);
 
-        return new PageUtils(page);
+        List<Map<String, Object>> list = questionPaperDao.selectPage(pageInfo);
+        int totalCount = questionPaperDao.selectTotalCount(pageInfo);
+
+        return new PageUtils(list, totalCount, (Integer) pageInfo.get("limit"), (Integer) pageInfo.get("page"));
     }
-
 }

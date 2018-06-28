@@ -20,5 +20,7 @@ public interface QuestionKnowledgePointDao extends BaseMapper<QuestionKnowledgeP
 
     List<Map<String,Object>> selectPage(@Param("pageInfo") Map<String,Object> pageInfo);
 
-    int selectTotalCount();
+    int selectTotalCount(@Param("pageInfo") Map<String, Object> pageInfo);
+
+    List<Map<String,Object>> selectAll(int id);
 }

@@ -26,7 +26,7 @@
         prop="id"
         header-align="center"
         align="center"
-        label="id">
+        label="ID">
       </el-table-column>
       <el-table-column
         prop="knowledgePoint"

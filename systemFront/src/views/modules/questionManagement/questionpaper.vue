@@ -12,8 +12,9 @@
     </el-form>
     <el-table
       :data="dataList"
-      border
+      size="mini"
       v-loading="dataListLoading"
+      border
       @selection-change="selectionChangeHandle"
       style="width: 100%;">
       <el-table-column
@@ -26,37 +27,45 @@
         prop="id"
         header-align="center"
         align="center"
-        label="">
+        label="ID">
       </el-table-column>
       <el-table-column
-        prop="documentType"
+        prop="courseTitle"
+        header-align="center"
+        align="center"
+        label="课程名称">
+      </el-table-column>
+      <el-table-column
+        prop="knowledgePoint"
+        header-align="center"
+        align="center"
+        label="知识点">
+      </el-table-column>
+      <el-table-column
+        prop="document_type"
         header-align="center"
         align="center"
         label="文档类型">
       </el-table-column>
       <el-table-column
-        prop="questionType"
-        header-align="center"
-        align="center"
-        label="试题类型">
-      </el-table-column>
-      <el-table-column
-        prop="uploadAddress"
-        header-align="center"
-        align="center"
-        label="上传地址">
-      </el-table-column>
-      <el-table-column
-        prop="uploadBy"
+        prop="username"
         header-align="center"
         align="center"
         label="上传者">
       </el-table-column>
       <el-table-column
-        prop="uploadTime"
+        prop="upload_time"
         header-align="center"
         align="center"
+        width="150"
         label="上传时间">
+      </el-table-column>
+      <el-table-column
+        prop="upload_address"
+        header-align="center"
+        align="center"
+        width="600"
+        label="上传地址">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -65,7 +74,6 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
           <el-button type="text" size="small" @click="deleteHandle(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
@@ -121,6 +129,7 @@
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
+            console.log(data)
             this.dataList = data.page.list
             this.totalPage = data.page.totalCount
           } else {

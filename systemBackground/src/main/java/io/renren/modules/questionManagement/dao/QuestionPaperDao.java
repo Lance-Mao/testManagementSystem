@@ -3,6 +3,10 @@ package io.renren.modules.questionManagement.dao;
 import io.renren.modules.questionManagement.entity.QuestionPaperEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 试题文件
@@ -13,5 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface QuestionPaperDao extends BaseMapper<QuestionPaperEntity> {
-	
+
+    List<Map<String,Object>> selectPage(@Param("pageInfo") Map<String,Object> pageInfo);
+
+    int selectTotalCount(@Param("pageInfo") Map<String, Object> pageInfo);
 }

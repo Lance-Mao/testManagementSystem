@@ -13,5 +13,35 @@
         <result property="uploadTime" column="upload_time"/>
     </resultMap>
 
+    <select id="selectPage" parameterType="map" resultType="map">
+        select qct.course_title courseTitle,qkp.knowledge_point knowledgePoint,qp.*,su.username
+        from question_paper qp
+        left join sys_user su on su.user_id = qp.upload_by
+        left join question_course_title qct on qct.id = qp.course_title_id
+        left join question_knowledge_point qkp on qkp.id = qp.knowledge_point_id
+        <where>
+            <if test='pageInfo.key != ""'>
+                qct.course_title = #{pageInfo.key} or
+                qkp.knowledge_point = #{pageInfo.key} or
+                su.username = #{pageInfo.key}
+            </if>
+        </where>
+        ORDER BY qp.id DESC
+        LIMIT #{pageInfo.page},#{pageInfo.limit}
+    </select>
+
+    <select id="selectTotalCount" parameterType="map" resultType="int">
+        select COUNT(1) from question_paper qp
+        left join sys_user su on su.user_id = qp.upload_by
+        left join question_course_title qct on qct.id = qp.course_title_id
+        left join question_knowledge_point qkp on qkp.id = qp.knowledge_point_id
+        <where>
+            <if test='pageInfo.key != ""'>
+                qct.course_title = #{pageInfo.key} or
+                qkp.knowledge_point = #{pageInfo.key} or
+                su.username = #{pageInfo.key}
+            </if>
+        </where>
+    </select>
 
 </mapper>

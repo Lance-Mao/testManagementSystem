@@ -57,7 +57,10 @@
           this.$refs['dataForm'].resetFields()
           this.$http({
             url: this.$http.adornUrl(`/questionManagement/questioncoursetitle/lists`),
-            method: 'get'
+            method: 'get',
+            params: this.$http.adornParams({
+              'isChild': 'no'
+            })
           }).then(data => {
             if (data && data.data.code === 0) {
               _this.options.push(...data.data.list)

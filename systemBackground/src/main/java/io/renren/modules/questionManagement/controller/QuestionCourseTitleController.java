@@ -48,8 +48,8 @@ public class QuestionCourseTitleController {
      */
     @RequestMapping("/lists")
     @RequiresPermissions("questionManagement:questioncoursetitle:list")
-    public R lists(){
-        List<Map<String,Object>> list = questionCourseTitleService.selectAll();
+    public R lists(@RequestParam Map<String, Object> params){
+        List<Map<String,Object>> list = questionCourseTitleService.selectAll(params);
 
         return R.ok().put("list", list);
     }

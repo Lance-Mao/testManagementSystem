@@ -25,8 +25,22 @@
         LIMIT #{pageInfo.page},#{pageInfo.limit}
     </select>
     
-    <select id="selectTotalCount" resultType="int">
-        select count(1) from question_knowledge_point;
+    <select id="selectTotalCount" parameterType="string" resultType="int">
+        select count(1) from question_knowledge_point qkp
+        left join sys_user su on su.user_id = qkp.creator
+        left join question_course_title qct on qct.id = qkp.course_title_id
+        <where>
+            <if test="pageInfo.key != '' ">
+                qkp.knowledge_point = #{pageInfo.key} or
+                qct.course_title = #{pageInfo.key} or
+                su.username = #{pageInfo.key}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAll" parameterType="int" resultType="map">
+        select qkp.id value,qkp.knowledge_point label from question_knowledge_point qkp
+        where qkp.course_title_id = #{id};
     </select>
 
 </mapper>

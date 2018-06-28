@@ -1,22 +1,16 @@
 package io.renren.modules.questionManagement.service.impl;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import io.renren.common.utils.PageUtils;
-import io.renren.common.utils.Query;
-
 import io.renren.modules.questionManagement.dao.QuestionKnowledgePointDao;
 import io.renren.modules.questionManagement.entity.QuestionKnowledgePointEntity;
 import io.renren.modules.questionManagement.service.QuestionKnowledgePointService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 @Service("questionKnowledgePointService")
@@ -27,24 +21,27 @@ public class QuestionKnowledgePointServiceImpl extends ServiceImpl<QuestionKnowl
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        Map<String, Object> pageInfo = new HashMap<>();
-        String key = (String) params.get("key");
 
-        int page = Integer.valueOf((String) params.get("page"));
-        int limit = Integer.valueOf((String) params.get("limit"));
-
-        if (StringUtils.isNotBlank(key)) {
-            pageInfo.put("key", key);
-        }else {
-            pageInfo.put("key", "");
-        }
-        pageInfo.put("page", page);
-        pageInfo.put("limit", limit);
+        Map<String, Object> pageInfo = PageUtils.getPageInfo(params);
 
         List<Map<String, Object>> list = questionKnowledgePointDao.selectPage(pageInfo);
-        int totalCount = questionKnowledgePointDao.selectTotalCount();
+        int totalCount = questionKnowledgePointDao.selectTotalCount(pageInfo);
 
-        return new PageUtils(list, totalCount, limit, page);
+        return new PageUtils(list, totalCount, (Integer) pageInfo.get("limit"), (Integer) pageInfo.get("page"));
+    }
+
+    @Override
+    public List<Map<String, Object>> selectByCourseTitleId(Map<String, Object> params) {
+        String isChild = (String) params.get("isChild");
+        int id = Integer.parseInt((String) params.get("id"));
+        List<Map<String, Object>> datas = questionKnowledgePointDao.selectAll(id);
+        if (isChild.equals("yes")) {
+            for (Map<String,Object> data : datas) {
+                data.put("children", new ArrayList<>());
+            }
+        }
+
+        return datas;
     }
 
 }

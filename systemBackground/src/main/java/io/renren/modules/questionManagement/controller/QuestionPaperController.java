@@ -1,21 +1,23 @@
 package io.renren.modules.questionManagement.controller;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
+import io.renren.common.exception.RRException;
+import io.renren.common.utils.ShiroUtils;
+import io.renren.modules.oss.cloud.OSSFactory;
+import io.renren.modules.oss.entity.SysOssEntity;
+import io.renren.modules.oss.service.SysOssService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.renren.modules.questionManagement.entity.QuestionPaperEntity;
 import io.renren.modules.questionManagement.service.QuestionPaperService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
-
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -42,6 +44,31 @@ public class QuestionPaperController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 试题上传
+     */
+    @PostMapping("/upload")
+    @RequiresPermissions("questionManagement:questionpaper:upload")
+    public R upload(@RequestParam("file") MultipartFile file,@RequestParam Map<String, Object> params) throws Exception {
+        if (file.isEmpty()) {
+            throw new RRException("上传文件不能为空");
+        }
+
+        //上传文件
+        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix);
+
+        //保存文件信息
+        QuestionPaperEntity questionPaperEntity = new QuestionPaperEntity();
+        questionPaperEntity.setUploadAddress(url);
+        questionPaperEntity.setDocumentType(suffix);
+        questionPaperEntity.setCourseTitleId(Integer.parseInt((String) params.get("courseTitleId")));
+        questionPaperEntity.setKnowledgePointId(Long.valueOf((String) params.get("knowledgePointId")));
+        questionPaperEntity.setUploadBy(ShiroUtils.getUserId());
+        questionPaperService.insert(questionPaperEntity);
+
+        return R.ok().put("url", url);
+    }
 
     /**
      * 信息

@@ -1,6 +1,7 @@
 package io.renren.modules.questionManagement.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import io.renren.common.utils.ShiroUtils;
@@ -42,6 +43,16 @@ public class QuestionKnowledgePointController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 根据课程id获取相关知识点
+     */
+    @RequestMapping("/lists")
+    @RequiresPermissions("questionManagement:questionknowledgepoint:list")
+    public R lists(@RequestParam Map<String, Object> params) {
+        List<Map<String,Object>> list =  questionKnowledgePointService.selectByCourseTitleId(params);
+
+        return R.ok().put("list", list);
+    }
 
     /**
      * 信息

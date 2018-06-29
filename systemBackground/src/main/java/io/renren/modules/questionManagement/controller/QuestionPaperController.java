@@ -1,23 +1,22 @@
 package io.renren.modules.questionManagement.controller;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Map;
-
 import io.renren.common.exception.RRException;
+import io.renren.common.utils.PageUtils;
+import io.renren.common.utils.R;
+import io.renren.common.utils.ResolveWordUtils;
 import io.renren.common.utils.ShiroUtils;
 import io.renren.modules.oss.cloud.OSSFactory;
-import io.renren.modules.oss.entity.SysOssEntity;
-import io.renren.modules.oss.service.SysOssService;
+import io.renren.modules.questionManagement.entity.QuestionPaperEntity;
+import io.renren.modules.questionManagement.service.QuestionPaperService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import io.renren.modules.questionManagement.entity.QuestionPaperEntity;
-import io.renren.modules.questionManagement.service.QuestionPaperService;
-import io.renren.common.utils.PageUtils;
-import io.renren.common.utils.R;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -54,9 +53,11 @@ public class QuestionPaperController {
             throw new RRException("上传文件不能为空");
         }
 
+        List<Map<String, Object>> data = ResolveWordUtils.getData(file);
+//        System.out.println(data + "解析数据");
         //上传文件
         String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-        String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix);
+        String url = Objects.requireNonNull(OSSFactory.build()).uploadSuffix(file.getBytes(), suffix);
 
         //保存文件信息
         QuestionPaperEntity questionPaperEntity = new QuestionPaperEntity();

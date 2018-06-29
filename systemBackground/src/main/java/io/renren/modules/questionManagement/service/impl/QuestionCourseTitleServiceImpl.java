@@ -17,6 +17,7 @@ import io.renren.common.utils.Query;
 import io.renren.modules.questionManagement.dao.QuestionCourseTitleDao;
 import io.renren.modules.questionManagement.entity.QuestionCourseTitleEntity;
 import io.renren.modules.questionManagement.service.QuestionCourseTitleService;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("questionCourseTitleService")

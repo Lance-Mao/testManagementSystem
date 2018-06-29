@@ -26,7 +26,7 @@
                 su.username = #{pageInfo.key}
             </if>
         </where>
-        ORDER BY qp.id DESC
+        ORDER BY qp.id ASC
         LIMIT #{pageInfo.page},#{pageInfo.limit}
     </select>
 

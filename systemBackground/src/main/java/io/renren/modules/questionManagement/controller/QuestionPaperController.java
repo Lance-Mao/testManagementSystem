@@ -7,7 +7,10 @@ import io.renren.common.utils.ResolveWordUtils;
 import io.renren.common.utils.ShiroUtils;
 import io.renren.modules.oss.cloud.OSSFactory;
 import io.renren.modules.questionManagement.entity.QuestionPaperEntity;
+import io.renren.modules.questionManagement.entity.QuestionQuestionBankEntity;
+import io.renren.modules.questionManagement.service.QuestionKnowledgePointService;
 import io.renren.modules.questionManagement.service.QuestionPaperService;
+import io.renren.modules.questionManagement.service.QuestionQuestionBankService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +35,9 @@ public class QuestionPaperController {
     @Autowired
     private QuestionPaperService questionPaperService;
 
+    @Autowired
+    private QuestionQuestionBankService questionQuestionBankService;
+
     /**
      * 列表
      */
@@ -53,8 +59,6 @@ public class QuestionPaperController {
             throw new RRException("上传文件不能为空");
         }
 
-        List<Map<String, Object>> data = ResolveWordUtils.getData(file);
-//        System.out.println(data + "解析数据");
         //上传文件
         String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         String url = Objects.requireNonNull(OSSFactory.build()).uploadSuffix(file.getBytes(), suffix);
@@ -66,6 +70,11 @@ public class QuestionPaperController {
         questionPaperEntity.setCourseTitleId(Integer.parseInt((String) params.get("courseTitleId")));
         questionPaperEntity.setKnowledgePointId(Long.valueOf((String) params.get("knowledgePointId")));
         questionPaperEntity.setUploadBy(ShiroUtils.getUserId());
+
+        List<Map<String, Object>> bankData = ResolveWordUtils.getData(file,questionPaperEntity);
+        System.out.println(bankData + "解析数据");
+
+        questionQuestionBankService.insertQuestionBank(bankData);
         questionPaperService.insert(questionPaperEntity);
 
         return R.ok().put("url", url);

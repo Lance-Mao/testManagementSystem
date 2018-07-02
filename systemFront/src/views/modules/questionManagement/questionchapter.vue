@@ -6,14 +6,13 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('questionManagement:questionquestionbank:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('questionManagement:questionquestionbank:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
+        <el-button v-if="isAuth('questionManagement:questionchapter:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+        <el-button v-if="isAuth('questionManagement:questionchapter:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
     <el-table
       :data="dataList"
       border
-      size="mini"
       v-loading="dataListLoading"
       @selection-change="selectionChangeHandle"
       style="width: 100%;">
@@ -30,71 +29,23 @@
         label="ID">
       </el-table-column>
       <el-table-column
+        prop="chapter"
+        header-align="center"
+        align="center"
+        label="章节">
+      </el-table-column>
+      <el-table-column
+        prop="title"
+        header-align="center"
+        align="center"
+        label="章节标题">
+      </el-table-column>
+      <el-table-column
         prop="courseTitle"
         header-align="center"
         align="center"
         label="课程名称">
       </el-table-column>
-      <el-table-column
-        prop="knowledgePoint"
-        header-align="center"
-        align="center"
-        label="知识点">
-      </el-table-column>
-      <el-table-column
-        prop="question_type"
-        header-align="center"
-        align="center"
-        label="题型">
-      </el-table-column>
-      <el-table-column
-        prop="username"
-        header-align="center"
-        align="center"
-        label="录入者">
-      </el-table-column>
-      <el-table-column
-        prop="entry_time"
-        header-align="center"
-        align="center"
-        label="录入时间">
-      </el-table-column>
-      <el-table-column
-        prop="update_time"
-        header-align="center"
-        align="center"
-        label="更新时间">
-      </el-table-column>
-       <el-table-column type="expand">
-         <template slot-scope="props">
-           <el-form label-position="left" inline class="demo-table-expand">
-              <el-form-item label="题目描述">
-                <span>{{ props.row.title_description }}</span>
-              </el-form-item>
-              <el-form-item label="答案">
-                <span>{{ props.row.answer }}</span>
-              </el-form-item>
-              <el-form-item label="选项A">
-                <span>{{ props.row.answer_a }}</span>
-              </el-form-item>
-              <el-form-item label="选项B">
-                <span>{{ props.row.answer_b }}</span>
-              </el-form-item>
-              <el-form-item label="选项C">
-                <span>{{ props.row.answer_c }}</span>
-              </el-form-item>
-              <el-form-item label="选项D">
-                <span>{{ props.row.answer_d }}</span>
-              </el-form-item>
-              <el-form-item label="选项E">
-                <span>{{ props.row.answer_e }}</span>
-              </el-form-item>
-              <el-form-item label="选项F">
-                <span>{{ props.row.answer_f }}</span>
-              </el-form-item>
-           </el-form>
-        </template>
-       </el-table-column>
       <el-table-column
         fixed="right"
         header-align="center"
@@ -122,7 +73,7 @@
 </template>
 
 <script>
-  import AddOrUpdate from './questionquestionbank-add-or-update'
+  import AddOrUpdate from './questionchapter-add-or-update'
   export default {
     data () {
       return {
@@ -149,7 +100,7 @@
       getDataList () {
         this.dataListLoading = true
         this.$http({
-          url: this.$http.adornUrl('/questionManagement/questionquestionbank/list'),
+          url: this.$http.adornUrl('/questionManagement/questionchapter/list'),
           method: 'get',
           params: this.$http.adornParams({
             'page': this.pageIndex,
@@ -158,7 +109,6 @@
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
-            console.log(data, '数据列表')
             this.dataList = data.page.list
             this.totalPage = data.page.totalCount
           } else {
@@ -201,7 +151,7 @@
           type: 'warning'
         }).then(() => {
           this.$http({
-            url: this.$http.adornUrl('/questionManagement/questionquestionbank/delete'),
+            url: this.$http.adornUrl('/questionManagement/questionchapter/delete'),
             method: 'post',
             data: this.$http.adornData(ids, false)
           }).then(({data}) => {
@@ -223,18 +173,3 @@
     }
   }
 </script>
-
-<style>
-  .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
-  }
-</style>

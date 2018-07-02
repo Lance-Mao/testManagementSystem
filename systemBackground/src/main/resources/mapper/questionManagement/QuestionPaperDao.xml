@@ -3,7 +3,7 @@
 
 <mapper namespace="io.renren.modules.questionManagement.dao.QuestionPaperDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="io.renren.modules.questionManagement.entity.QuestionPaperEntity" id="questionPaperMap">
         <result property="id" column="id"/>
         <result property="documentType" column="document_type"/>
@@ -43,5 +43,16 @@
             </if>
         </where>
     </select>
+
+    <insert id="insertQuestionBank" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into
+        question_question_bank (course_title_id, knowledge_title_id, question_type, enterer, title_description, answer,
+        answer_a, answer_b, answer_c, answer_d, answer_e, answer_f)
+        values
+        <foreach collection="bankData" item="item" index="index_one" separator=",">
+            (${item.courseTitleId},${item.knowledgeTitleId},${item.typeContent},${item.enterer},${item.content},${item.answer},
+            ${item.answer_A},${item.answer_B},${item.answer_C},${item.answer_D},${item.answer_E},${item.answer_F})
+        </foreach>
+    </insert>
 
 </mapper>

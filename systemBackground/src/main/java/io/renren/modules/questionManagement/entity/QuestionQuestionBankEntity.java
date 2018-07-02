@@ -33,7 +33,7 @@ public class QuestionQuestionBankEntity implements Serializable {
 	/**
 	 * 题型
 	 */
-	private Integer questionTypeId;
+	private String questionType;
 	/**
 	 * 录入者
 	 */
@@ -115,18 +115,15 @@ public class QuestionQuestionBankEntity implements Serializable {
 	public Long getKnowledgeTitleId() {
 		return knowledgeTitleId;
 	}
-	/**
-	 * 设置：题型
-	 */
-	public void setQuestionTypeId(Integer questionTypeId) {
-		this.questionTypeId = questionTypeId;
+
+	public String getQuestionType() {
+		return questionType;
 	}
-	/**
-	 * 获取：题型
-	 */
-	public Integer getQuestionTypeId() {
-		return questionTypeId;
+
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
 	}
+
 	/**
 	 * 设置：录入者
 	 */

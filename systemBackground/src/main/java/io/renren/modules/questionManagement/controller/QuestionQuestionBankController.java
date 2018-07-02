@@ -42,6 +42,17 @@ public class QuestionQuestionBankController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 关联查询列表
+     */
+    @RequestMapping("/lists")
+    @RequiresPermissions("questionManagement:questionquestionbank:list")
+    public R lists(@RequestParam Map<String, Object> params){
+        PageUtils page = questionQuestionBankService.queryPage(params);
+
+        return R.ok().put("page", page);
+    }
+
 
     /**
      * 信息

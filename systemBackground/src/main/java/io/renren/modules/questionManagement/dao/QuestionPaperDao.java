@@ -21,4 +21,6 @@ public interface QuestionPaperDao extends BaseMapper<QuestionPaperEntity> {
     List<Map<String,Object>> selectPage(@Param("pageInfo") Map<String,Object> pageInfo);
 
     int selectTotalCount(@Param("pageInfo") Map<String, Object> pageInfo);
+
+    void insertQuestionBank(@Param("bankData") List<Map<String,Object>> bankData);
 }

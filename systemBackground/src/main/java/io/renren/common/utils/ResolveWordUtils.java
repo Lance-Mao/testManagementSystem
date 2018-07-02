@@ -1,5 +1,6 @@
 package io.renren.common.utils;
 
+import io.renren.modules.questionManagement.entity.QuestionPaperEntity;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class ResolveWordUtils {
 
-    public static List<Map<String, Object>> getData(MultipartFile file) {
+    public static List<Map<String, Object>> getData(MultipartFile file,QuestionPaperEntity questionPaperEntity) {
         String absolutePath = "/home/lancemao/Documents/pic";
         try {
             XWPFDocument document = new XWPFDocument(file.getInputStream());
@@ -28,18 +29,20 @@ public class ResolveWordUtils {
             Map<String, Object> imageData = saveAllImage(absolutePath, document);
 
 
-            List<Map<String, Object>> allInfo = new ArrayList<>();  //
+            List<Map<String, Object>> allInfo = new ArrayList<>();  //所有题
+            List<Map<String, Object>> allInfoAnswer = new ArrayList<>();  //所有题对应的答案
 
             int typeCount = 0;
             int questionCount = 0;
             String regex_one = "r:id=\"(.*?)\"";
             String regex_two = "r:embed=\"(.*?)\"";
+            boolean isAnswer = false;  //判断是否进入答案部分
             for (int i = 0; i < paragraphs.size(); i++) {
 
                 StringBuilder _html;
                 BigInteger numIlvl = paragraphs.get(i).getNumIlvl();
 
-                _html = new StringBuilder("<p class='" + paragraphs.get(i).getStyle() + " " + numIlvl + "'>");
+                _html = new StringBuilder();
                 List<XWPFRun> runList = paragraphs.get(i).getRuns();
                 for (XWPFRun xwpfRun : runList) {
 
@@ -52,16 +55,15 @@ public class ResolveWordUtils {
                         String imgPath = (String) imageData.get(m_two.group(1));
                         saveImg(imgPath, _html);
                     } else if (xwpfRun.getSubscript().toString().equals("SUBSCRIPT")) {
-                        _html.append("<span class='subscript'>" + xwpfRun + "</span>");
+                        _html.append("###").append("<subscript>" + xwpfRun + "</subscript>");
                     } else if (xwpfRun.getSubscript().toString().equals("SUPERSCRIPT")) {
-                        _html.append("<span class='superscript'>").append(xwpfRun).append("</span>");
+                        _html.append("###").append("<superscript>").append(xwpfRun).append("</superscript>");
                     } else {
-                        _html.append("<span> ").append(xwpfRun).append("</span>");
+                        _html.append(xwpfRun);
                     }
 
                     tempText.append(xwpfRun.toString());
                 }
-                _html.append("</p>");
 
                 Map<String, Object> itemInfo = new HashMap<>();
 
@@ -86,15 +88,20 @@ public class ResolveWordUtils {
                     }
                 }
 
+                if ((int) itemInfo.get("questionCount") == 0 && itemInfo.get("typeContent").toString().trim().equals("答案")) {
+                    isAnswer = true;
+                }
                 /**
                  * 去除不必要的空行
                  */
                 if (itemInfo.size() != 0) {
-                    allInfo.add(itemInfo);
+                    if (isAnswer) {
+                        allInfoAnswer.add(itemInfo);
+                    } else {
+                        allInfo.add(itemInfo);
+                    }
                 }
             }
-
-//            System.out.println(allInfo + "解析结果");
 
             // 设置初始值 用于循环判断结构
             int questionTypeCount = 0;
@@ -107,27 +114,39 @@ public class ResolveWordUtils {
             List<Map<String, Object>> options = new ArrayList<>();    //每个题目的选项
             Map<String, Object> option;  //单个选项的信息
 
+            int option_item = 64; //用于记录选项
+            int answer_item = 0;  //用于记录答案的位置
             for (int i = 0; i < allInfo.size(); i++) {
                 int currentTypeCount = (int) allInfo.get(i).get("typeCount");
                 if (currentTypeCount != questionTypeCount) {
+                    answer_item++;
                     questionType = new HashMap<>();
                     questionTypeCount = currentTypeCount;
                     questionDetailsCount = 0;
                     questionType.put("typeContent", allInfo.get(i).get("typeContent"));
                     questionType.put("type", allInfo.get(i).get("type"));
+                    questionType.put("enterer", questionPaperEntity.getUploadBy());
+                    questionType.put("courseTitleId", questionPaperEntity.getCourseTitleId());
+                    questionType.put("knowledgeTitleId", questionPaperEntity.getKnowledgePointId());
                     questionDetails = new ArrayList<>();
                 } else {
                     if ((int) allInfo.get(i).get("questionCount") != questionDetailsCount) {
+                        option_item = 64; //用于初始化，重新记录下一轮选项
+                        answer_item++;
                         questionDetail = new HashMap<>();
                         questionDetail.put("content", allInfo.get(i).get("content"));
                         questionDetail.put("type", allInfo.get(i).get("type"));
+                        questionDetail.put("answer", allInfoAnswer.get(answer_item).get("content"));
+                        questionDetail.put("answer_A", "---");
+                        questionDetail.put("answer_B", "---");
+                        questionDetail.put("answer_C", "---");
+                        questionDetail.put("answer_D", "---");
+                        questionDetail.put("answer_E", "---");
+                        questionDetail.put("answer_F", "---");
                         questionDetailsCount = (int) allInfo.get(i).get("questionCount");
-                        options = new ArrayList<>();
                     } else {
-                        option = new HashMap<>();
-                        option.put("type", allInfo.get(i).get("type"));
-                        option.put("content", allInfo.get(i).get("content"));
-                        options.add(option);
+                        option_item++;
+                        questionDetail.put("answer_" + byteAsciiToChar(option_item), allInfo.get(i).get("content"));
                     }
 
                 }
@@ -137,10 +156,8 @@ public class ResolveWordUtils {
                     questionTypes.add(questionType);
                 }
                 if (questionDetailsCount != 0 && getNextCount(allInfo, i, "questionCount") != questionDetailsCount) {
-                    questionDetail.put("options", options);
                     questionDetails.add(questionDetail);
                 }
-                System.out.println(questionTypes +"第" + i + "次拼接" );
 
             }
             return questionTypes;
@@ -151,6 +168,13 @@ public class ResolveWordUtils {
         return null;
     }
 
+    /**
+     * 保存图片
+     * @param absolutePath
+     * @param document
+     * @return
+     * @throws IOException
+     */
     private static Map<String, Object> saveAllImage(String absolutePath, XWPFDocument document) throws IOException {
         List<XWPFPictureData> pictures = document.getAllPictures();
         Map<String, Object> map = new HashMap<>();
@@ -188,6 +212,18 @@ public class ResolveWordUtils {
 
     }
 
+    /**
+     * 根据数字转换对应的ascii
+     *
+     * @param ascii
+     * @return
+     */
+    public static char byteAsciiToChar(int ascii) {
+        char ch = (char) ascii;
+        return ch;
+
+    }
+
     private static boolean judgmentSequence(List<XWPFParagraph> paragraphs, int i, String s) {
         return s.equals(paragraphs.get(i).getNumIlvl().toString().trim());
     }
@@ -202,6 +238,6 @@ public class ResolveWordUtils {
     }
 
     private static void saveImg(String imgPath, StringBuilder _html) throws IOException {
-        _html.append("<img src='").append(imgPath).append("' />");
+        _html.append("###").append("<image>").append(imgPath).append("</image>");
     }
 }

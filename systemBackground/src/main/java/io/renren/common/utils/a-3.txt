@@ -1,5 +1,6 @@
 [
     {
+        typeContent=选择题,
         questionDetails=
             [
                 {
@@ -25,6 +26,7 @@
                     content=<p class='a3 0'><span> 二烯体</span><span> 1,3-</span><span> 丁二烯与下列</span><span> 亲二烯体</span><span> 化合物发生</span><span> Diels-Alder</span><span> 反应时活性较大的是</span><span> (  ) {</span><span> 第四章炔烃和二烯烃</span><span> }</span></p>
                 }
             ]
+        type=questionType
     },
     {
         typeContent=命名题,
@@ -118,9 +120,201 @@
     {
         typeContent=选择题-答案,
         questionDetails=
-        [
-            {
-                options=[],
-                type=questionName,
-                content=<p class='a3 0'><span> c</span></p>
-            }, {options=[], type=questionName, content=<p class='a3 0'><span> b</span></p>}], type=questionType}, {typeContent=命名题-答案, questionDetails=[{options=[], type=questionName, content=<p class='a3 0'><span> 4-</span><span> 己烯</span><span> -1-</span><span> 炔</span></p>}, {options=[], type=questionName, content=<p class='a3 0'><span> 1-</span><span> 戊烯</span><span> -4-</span><span> 炔</span></p>}], type=questionType}, {typeContent=完成反应式-答案, questionDetails=[{options=[], type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/1530280051857261dc3bb-949a-4d3f-ab48-8d11f5c21ea6.emf' /></p>}, {options=[], type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/153028005185703961db2-d357-4fe4-bc91-4b206cc06cd1.emf' /></p>}], type=questionType}, {typeContent=鉴别-答案, questionDetails=[{options=[], type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/1530280051857a6123f98-3663-4454-8f05-f1b8e4a8685b.emf' /></p>}, {options=[], type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15302800518577e335dca-11f4-4a95-93ae-7986c4948e31.emf' /></p>}, {options=[], type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15302800518579b407b1a-b0c7-4b22-b6ce-4f0fbdd13d77.emf' /></p>}], type=questionType}, {typeContent=合成-答案, questionDetails=[{options=[], type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15302800518570f642433-057d-49b0-aa99-b473309e7934.emf' /></p>}, {options=[], type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15302800518586d60e55f-d549-4df3-a7fe-63796f4a9d97.emf' /></p>}], type=questionType}, {typeContent=推测结构-答案, questionDetails=[{options=[], type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/153028005185877a5c1cd-8232-4fd5-8b82-cbe6fb6ca265.emf' /></p>}, {options=[], type=questionName, content=<p class='a3 0'><span> A</span><span> 为</span><img src='/home/lancemao/Documents/pic/15302800518583e30e48d-46fb-4827-af44-4253ba5b9fd2.emf' /><span> ；</span><span> B</span><span> 为</span><img src='/home/lancemao/Documents/pic/15302800518582cb95a38-301a-4885-a892-74718e8c93b5.emf' /><span> ；</span><span> C</span><span> 为</span><img src='/home/lancemao/Documents/pic/15302800518583a0630a3-5bee-4a51-bee6-9f738e53fa43.emf' /><span> ；</span><span> D</span><span> 为</span><img src='/home/lancemao/Documents/pic/153028005185812b77d97-5f8b-4591-a421-bbde861198b3.emf' /><span> 。</span></p>}], type=questionType}]
+            [
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><span> c</span></p>
+                },
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><span> b</span></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=命名题-答案,
+        questionDetails=
+            [
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><span> 4-</span><span> 己烯</span><span> -1-</span><span> 炔</span></p>
+                },
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><span> 1-</span><span> 戊烯</span><span> -4-</span><span> 炔</span></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=完成反应式-答案,
+        questionDetails=
+            [
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/1530280051857261dc3bb-949a-4d3f-ab48-8d11f5c21ea6.emf' /></p>
+                },
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/153028005185703961db2-d357-4fe4-bc91-4b206cc06cd1.emf' /></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=鉴别-答案,
+        questionDetails=
+            [
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/1530280051857a6123f98-3663-4454-8f05-f1b8e4a8685b.emf' /></p>
+                },
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15302800518577e335dca-11f4-4a95-93ae-7986c4948e31.emf' /></p>
+                },
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15302800518579b407b1a-b0c7-4b22-b6ce-4f0fbdd13d77.emf' /></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=合成-答案,
+        questionDetails=
+            [
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15302800518570f642433-057d-49b0-aa99-b473309e7934.emf' /></p>
+                },
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15302800518586d60e55f-d549-4df3-a7fe-63796f4a9d97.emf' /></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=推测结构-答案,
+        questionDetails=
+            [
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/153028005185877a5c1cd-8232-4fd5-8b82-cbe6fb6ca265.emf' /></p>
+                },
+                {
+                    options=[],
+                    type=questionName,
+                    content=<p class='a3 0'><span> A</span><span> 为</span><img src='/home/lancemao/Documents/pic/15302800518583e30e48d-46fb-4827-af44-4253ba5b9fd2.emf' /><span> ；</span><span> B</span><span> 为</span><img src='/home/lancemao/Documents/pic/15302800518582cb95a38-301a-4885-a892-74718e8c93b5.emf' /><span> ；</span><span> C</span><span> 为</span><img src='/home/lancemao/Documents/pic/15302800518583a0630a3-5bee-4a51-bee6-9f738e53fa43.emf' /><span> ；</span><span> D</span><span> 为</span><img src='/home/lancemao/Documents/pic/153028005185812b77d97-5f8b-4591-a421-bbde861198b3.emf' /><span> 。</span></p>
+                }
+            ],
+        type=questionType
+    }
+]
+
+
+[
+    {
+        typeContent=选择题,
+        questionDetails=
+            [
+                {
+                    option_D=<p class='a3 1'><span> 都不是</span></p>,
+                    option_B=<p class='a3 1'><span> 乙烷</span></p>,
+                    option_C=<p class='a3 1'><span> 乙炔</span></p>,
+                    type=questionName,
+                    option_A=<p class='a3 1'><span> 乙烯</span></p>,
+                    content=<p class='a3 0'><span> 下列化合物中氢原子最易离解的为</span><span> (  ){</span><span> 第四章炔烃和二烯烃</span><span> }</span></p>
+                },
+                {
+                    option_D=<p class='a3 1'><span> 丙烯</span></p>,
+                    option_B=<p class='a3 1'><span> 丙烯醛</span></p>,
+                    option_C=<p class='a3 1'><span> 丁烯</span><span> 醛</span></p>,
+                    type=questionName,
+                    option_A=<p class='a3 1'><span> 乙烯</span></p>,
+                    content=<p class='a3 0'><span> 二烯体</span><span> 1,3-</span><span> 丁二烯与下列</span><span> 亲二烯体</span><span> 化合物发生</span><span> Diels-Alder</span><span> 反应时活性较大的是</span><span> (  ) {</span><span> 第四章炔烃和二烯烃</span><span> }</span></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=命名题,
+        questionDetails=
+            [
+                {
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15303282888610597785f-0685-4ed7-864f-fa3b28c17826.emf' /><span> {</span><span> 第四章炔烃和二烯烃</span><span> }</span><span> END</span></p>
+                },
+                {
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15303282888613c02c124-893d-4e8c-8526-e0c30d7c3948.emf' /><span> {</span><span> 第四章炔烃和二烯烃</span><span> }</span><span>  END</span></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=完成反应式,
+        questionDetails=
+            [
+                {
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15303282888578fac1230-f19f-40f2-953f-eef5ba8974fe.emf' /><span> {</span><span> 第四章炔烃和二烯烃</span><span> }</span><span> END</span></p>
+                },
+                {
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/153032828885767e5bf46-ebce-4b93-bf9f-cefc3c6624d7.emf' /><span> {</span><span> 第四章炔烃和二烯烃</span><span> }</span><span> END</span></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=鉴别,
+        questionDetails=
+            [
+                {
+                    type=questionName,
+                    content=<p class='a3 0'><span> 乙烷、乙烯、乙炔。</span><span> {</span><span> 第二章烷烃</span><span> ,</span><span> 第三章烯烃</span><span> ,</span><span> 第四章炔烃和二烯烃</span><span> }</span><span> END</span></p>
+                },
+                {
+                    type=questionName,
+                    content=<p class='a3 0'><span> 丙烷、丙烯、丙炔。</span><span> {</span><span> 第二章烷烃</span><span> ,</span><span> 第三章烯烃</span><span> ,</span><span> 第四章炔烃和二烯烃</span><span> }</span><span> END</span></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=合成,
+        questionDetails=
+            [
+                {
+                    type=questionName,
+                    content=<p class='a3 0'><span> 以不多于</span><span> 2</span><span> 个碳原子的有机物为原料合成</span><span> 2-</span><span> 戊烯</span><span>  </span><span> {</span><span> 第四章炔烃和二烯烃</span><span> }</span><span> END</span></p>
+                },
+                {
+                    type=questionName,
+                    content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/1530328288858e2795fcb-23cc-4bb0-92cd-b753aee3356d.emf' /><span>  </span><span> {</span><span> 第四章炔烃和二烯烃</span><span> }</span><span> END</span></p>
+                }
+            ],
+        type=questionType
+    },
+    {
+        typeContent=推断结构,
+        questionDetails=
+            [
+                {
+                    type=questionName,
+                    content=<p class='a3 0'><span> 一个碳氢化合物</span><span> A</span><span> ，测得其分子量为</span><span> 80</span><span> ，</span><span> 10mg</span><span> 样品</span><span> A</span><span> 可吸收</span><span> 8.40mlH</span><span class='subscript'>2</span><span> , </span><span> 原样品中经臭氧</span><span> 氧</span><span> 化反应后分解，只得到甲醛与乙二醛（</span><img src='/home/lancemao/Documents/pic/1530328288858df2bf7c3-1c38-4b2e-90d9-76b6d829efd2.emf' /><span> ），则</span><span> A</span><span> 的结构式为？</span><span> {</span><span> 第四章炔烃和二烯烃</span><span> }</span><span> END</span></p>}, {type=questionName, content=<p class='a3 0'><span> 化合物（</span><span> A</span><span> ）的分子式为</span><span> C</span><span class='subscript'>4</span><span> H</span><span class='subscript'>9</span><span> Br</span><span> 与</span><span> KOH</span><span> 的醇溶液共热，生成烯烃</span><span> C</span><span class='subscript'>4</span><span> H</span><span class='subscript'>8</span><span> （</span><span> B</span><span> ），（</span><span> B</span><span> ）与溴反应得</span><span> C</span><span class='subscript'>4</span><span> H</span><span class='subscript'>8</span><span> Br</span><span class='subscript'>2</span><span> （</span><span> C</span><span> ），（</span><span> C</span><span> ）与</span><span> KNH</span><span class='subscript'>2</span><span> 作用转变为气体</span><span> C</span><span class='subscript'>4</span><span> H</span><span class='subscript'>6</span><span> （</span><span> D</span><span> ），（</span><span> D</span><span> ）通过银氨溶液时生成沉淀，给出化合物</span><span> A→D</span><span> 的结构式。</span><span> {</span><span> 第三章烯烃</span><span> ,</span><span> 第四章炔烃和二烯烃</span><span> ,</span><span> 第八章氯代</span><span> 烃</span><span> }</span><span> END</span></p>}], type=questionType}, {typeContent=答案, questionDetails=[], type=questionType}, {typeContent=选择题-答案, questionDetails=[{type=questionName, content=<p class='a3 0'><span> c</span></p>}, {type=questionName, content=<p class='a3 0'><span> b</span></p>}], type=questionType}, {typeContent=命名题-答案, questionDetails=[{type=questionName, content=<p class='a3 0'><span> 4-</span><span> 己烯</span><span> -1-</span><span> 炔</span></p>}, {type=questionName, content=<p class='a3 0'><span> 1-</span><span> 戊烯</span><span> -4-</span><span> 炔</span></p>}], type=questionType}, {typeContent=完成反应式-答案, questionDetails=[{type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/1530328288858d337d692-55ae-4cbe-833d-6a69cb10d90c.emf' /></p>}, {type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/153032828885907804b37-5640-484f-9661-c81e8b540071.emf' /></p>}], type=questionType}, {typeContent=鉴别-答案, questionDetails=[{type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15303282888591713afd6-fda1-410a-aeab-302df312209a.emf' /></p>}, {type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15303282888592b54f1f3-43cb-4343-b211-a4d60cb78544.emf' /></p>}, {type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15303282888594a5871e0-1300-404c-a05c-cca7e5afdc06.emf' /></p>}], type=questionType}, {typeContent=合成-答案, questionDetails=[{type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/1530328288860ae0ef0ea-f2d4-4e7d-8895-ff3d9bb274dd.emf' /></p>}, {type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/15303282888605df607c6-62b9-4af1-bf61-a9def80796d8.emf' /></p>}], type=questionType}, {typeContent=推测结构-答案, questionDetails=[{type=questionName, content=<p class='a3 0'><img src='/home/lancemao/Documents/pic/1530328288860dff14d81-31de-4339-aafb-951e96c2110d.emf' /></p>}, {type=questionName, content=<p class='a3 0'><span> A</span><span> 为</span><img src='/home/lancemao/Documents/pic/1530328288860cc850f05-aec2-4e8d-b2f4-4a236cc6402f.emf' /><span> ；</span><span> B</span><span> 为</span><img src='/home/lancemao/Documents/pic/15303282888601ca78c69-0dfa-46de-8daa-0d11378c9a8e.emf' /><span> ；</span><span> C</span><span> 为</span><img src='/home/lancemao/Documents/pic/1530328288861bd195bcc-e016-4feb-837e-f3c2b17953fd.emf' /><span> ；</span><span> D</span><span> 为</span><img src='/home/lancemao/Documents/pic/1530328288861d319f853-5dd0-4fd8-87a3-e9ffa400a5ef.emf' /><span> 。</span></p>}], type=questionType}]

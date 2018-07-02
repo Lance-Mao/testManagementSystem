@@ -22,5 +22,37 @@
         <result property="answerF" column="answer_f"/>
     </resultMap>
 
+    <select id="selectPage" parameterType="map" resultType="map">
+        select qqb.*, su.username username,qct.course_title courseTitle,qkp.knowledge_point knowledgePoint
+        from question_question_bank qqb
+        left join sys_user su on su.user_id = qqb.enterer
+        left join question_course_title qct on qct.id = qqb.course_title_id
+        left join question_knowledge_point qkp on qkp.id = qqb.knowledge_title_id
+        <where>
+            <if test='pageInfo.key != ""'>
+                qct.course_title = #{pageInfo.key} or
+                qkp.knowledge_point = #{pageInfo.key} or
+                su.username = #{pageInfo.key} or
+                qqb.question_type = #{pageInfo.key}
+            </if>
+        </where>
+        LIMIT #{pageInfo.page},#{pageInfo.limit}
+    </select>
+    
+    <select id="selectTotalCount" parameterType="map" resultType="int">
+        select count(1)
+        from question_question_bank qqb
+        left join sys_user su on su.user_id = qqb.enterer
+        left join question_course_title qct on qct.id = qqb.course_title_id
+        left join question_knowledge_point qkp on qkp.id = qqb.knowledge_title_id
+        <where>
+            <if test='pageInfo.key != ""'>
+                qct.course_title = #{pageInfo.key} or
+                qkp.knowledge_point = #{pageInfo.key} or
+                su.username = #{pageInfo.key} or
+                qqb.question_type = #{pageInfo.key}
+            </if>
+        </where>
+    </select>
 
 </mapper>

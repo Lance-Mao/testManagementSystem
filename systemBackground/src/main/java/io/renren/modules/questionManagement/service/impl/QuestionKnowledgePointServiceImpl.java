@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +31,9 @@ public class QuestionKnowledgePointServiceImpl extends ServiceImpl<QuestionKnowl
     }
 
     @Override
-    public List<Map<String, Object>> selectByCourseTitleId(Map<String, Object> params) {
+    public List<Map<String, Object>> selectByChapterId(Map<String, Object> params) {
         String isChild = (String) params.get("isChild");
-        int id = Integer.parseInt((String) params.get("id"));
+        int id = Integer.parseInt(params.get("id").toString());
         List<Map<String, Object>> datas = questionKnowledgePointDao.selectAll(id);
         if (isChild.equals("yes")) {
             for (Map<String,Object> data : datas) {
@@ -44,5 +43,6 @@ public class QuestionKnowledgePointServiceImpl extends ServiceImpl<QuestionKnowl
 
         return datas;
     }
+
 
 }

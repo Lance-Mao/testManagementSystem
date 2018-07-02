@@ -4,6 +4,9 @@ import io.renren.modules.questionManagement.entity.QuestionChapterEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 章节
  * 
@@ -13,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface QuestionChapterDao extends BaseMapper<QuestionChapterEntity> {
-	
+
+    List<Map<String,Object>> selectAll(int id);
 }

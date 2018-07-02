@@ -44,12 +44,12 @@ public class QuestionKnowledgePointController {
     }
 
     /**
-     * 根据课程id获取相关知识点
+     * 根据对应章节id获取相关知识点
      */
     @RequestMapping("/lists")
     @RequiresPermissions("questionManagement:questionknowledgepoint:list")
     public R lists(@RequestParam Map<String, Object> params) {
-        List<Map<String,Object>> list =  questionKnowledgePointService.selectByCourseTitleId(params);
+        List<Map<String,Object>> list =  questionKnowledgePointService.selectByChapterId(params);
 
         return R.ok().put("list", list);
     }

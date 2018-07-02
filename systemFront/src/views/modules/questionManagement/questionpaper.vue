@@ -36,6 +36,12 @@
         label="课程名称">
       </el-table-column>
       <el-table-column
+        prop="chapterName"
+        header-align="center"
+        align="center"
+        label="章节">
+      </el-table-column>
+      <el-table-column
         prop="knowledgePoint"
         header-align="center"
         align="center"

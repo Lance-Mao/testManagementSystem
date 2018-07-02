@@ -11,5 +11,9 @@
         <result property="courseTitle" column="course_title"/>
     </resultMap>
 
+    <select id="selectAll" parameterType="int" resultType="map">
+        select concat(qc.chapter,' ',qc.title) as label,qc.id as value from question_chapter qc
+        where qc.course_title = #{id}
+    </select>
 
 </mapper>

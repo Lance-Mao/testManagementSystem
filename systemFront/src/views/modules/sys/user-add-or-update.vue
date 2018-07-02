@@ -213,8 +213,8 @@
         })
       },
       handleItemChange (e) {
-        _this.options.find(item => item.value === e[0]).children = []
         if (e.length === 1) {
+          _this.options.find(item => item.value === e[0]).children = []
           this.$http({
             url: this.$http.adornUrl(`/area/college/lists?id=${e[0]}`),
             method: 'get'
@@ -222,7 +222,6 @@
             _this.options.find(item => item.value === e[0]).children.push(...data.data.colleges)
           })
         } else if (e.length === 2) {
-          _this.options.find(item => item.value === e[0]).children.find(item => item.value === e[1]).children = []
           _this.dataForm.college = e
           this.$http({
             url: this.$http.adornUrl(`/area/school/lists?id=${e[1]}`),

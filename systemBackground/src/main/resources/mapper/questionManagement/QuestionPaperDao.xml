@@ -14,11 +14,12 @@
     </resultMap>
 
     <select id="selectPage" parameterType="map" resultType="map">
-        select qct.course_title courseTitle,qkp.knowledge_point knowledgePoint,qp.*,su.username
+        select qct.course_title courseTitle,qkp.knowledge_point knowledgePoint,qp.*,su.username,qc.chapter chapterName
         from question_paper qp
         left join sys_user su on su.user_id = qp.upload_by
         left join question_course_title qct on qct.id = qp.course_title_id
         left join question_knowledge_point qkp on qkp.id = qp.knowledge_point_id
+        left join question_chapter qc on qc.id = qp.chapter
         <where>
             <if test='pageInfo.key != ""'>
                 qct.course_title = #{pageInfo.key} or
@@ -35,6 +36,7 @@
         left join sys_user su on su.user_id = qp.upload_by
         left join question_course_title qct on qct.id = qp.course_title_id
         left join question_knowledge_point qkp on qkp.id = qp.knowledge_point_id
+        left join question_chapter qc on qc.id = qp.chapter
         <where>
             <if test='pageInfo.key != ""'>
                 qct.course_title = #{pageInfo.key} or

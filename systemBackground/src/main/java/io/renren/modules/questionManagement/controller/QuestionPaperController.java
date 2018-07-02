@@ -8,6 +8,7 @@ import io.renren.common.utils.ShiroUtils;
 import io.renren.modules.oss.cloud.OSSFactory;
 import io.renren.modules.questionManagement.entity.QuestionPaperEntity;
 import io.renren.modules.questionManagement.entity.QuestionQuestionBankEntity;
+import io.renren.modules.questionManagement.service.QuestionChapterService;
 import io.renren.modules.questionManagement.service.QuestionKnowledgePointService;
 import io.renren.modules.questionManagement.service.QuestionPaperService;
 import io.renren.modules.questionManagement.service.QuestionQuestionBankService;
@@ -38,6 +39,12 @@ public class QuestionPaperController {
     @Autowired
     private QuestionQuestionBankService questionQuestionBankService;
 
+    @Autowired
+    private QuestionKnowledgePointService questionKnowledgePointService;
+
+    @Autowired
+    private QuestionChapterService questionChapterService;
+
     /**
      * 列表
      */
@@ -48,6 +55,7 @@ public class QuestionPaperController {
 
         return R.ok().put("page", page);
     }
+
 
     /**
      * 试题上传
@@ -69,6 +77,7 @@ public class QuestionPaperController {
         questionPaperEntity.setDocumentType(suffix);
         questionPaperEntity.setCourseTitleId(Integer.parseInt((String) params.get("courseTitleId")));
         questionPaperEntity.setKnowledgePointId(Long.valueOf((String) params.get("knowledgePointId")));
+        questionPaperEntity.setChapter(Long.valueOf(params.get("chapter").toString()));
         questionPaperEntity.setUploadBy(ShiroUtils.getUserId());
 
         List<Map<String, Object>> bankData = ResolveWordUtils.getData(file,questionPaperEntity);

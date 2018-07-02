@@ -1,6 +1,7 @@
 package io.renren.modules.questionManagement.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -42,6 +43,16 @@ public class QuestionChapterController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 根据课程获取相关的章节
+     */
+    @RequestMapping("/listByCourseTitle")
+    @RequiresPermissions("questionManagement:questionchapter:list")
+    public R listByCourseTitle(@RequestParam Map<String, Object> params){
+        List<Map<String,Object>> list = questionChapterService.listByCourseTitle(params);
+
+        return R.ok().put("list", list);
+    }
 
     /**
      * 信息

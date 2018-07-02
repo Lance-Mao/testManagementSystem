@@ -41,6 +41,7 @@
         dataForm: {
           id: 0,
           courseTitleId: null,
+          chapter: null,
           knowledgePointId: null
         },
         dataRule: {
@@ -52,6 +53,7 @@
         url: '',
         questionInfo: {
           courseTitleId: '',
+          chapter: '',
           knowledgePointId: ''
         }
       }
@@ -63,6 +65,7 @@
         this.options = []
         this.questionInfo = {
           courseTitleId: '',
+          chapter: '',
           knowledgePointId: ''
         }
         // 设置试题文档上传地址
@@ -115,22 +118,36 @@
         this.$emit('refreshDataList')
       },
       handleItemChange (e) {
-        _this.options.find(item => item.value === e[0]).children = []
-        this.$http({
-          url: this.$http.adornUrl(`/questionManagement/questionknowledgepoint/lists`),
-          method: 'get',
-          params: this.$http.adornParams({
-            'isChild': 'no',
-            'id': e[0]
+        if (e.length === 1) {
+          _this.options.find(item => item.value === e[0]).children = []
+          this.$http({
+            url: this.$http.adornUrl(`/questionManagement/questionchapter/listByCourseTitle`),
+            method: 'get',
+            params: this.$http.adornParams({
+              'isChild': 'yes',
+              'id': e[0]
+            })
+          }).then((data) => {
+            _this.options.find(item => item.value === e[0]).children.push(...data.data.list)
           })
-        }).then((data) => {
-          _this.options.find(item => item.value === e[0]).children.push(...data.data.list)
-        })
+        } else if (e.length === 2) {
+          this.$http({
+            url: this.$http.adornUrl(`/questionManagement/questionknowledgepoint/lists`),
+            method: 'get',
+            params: this.$http.adornParams({
+              'isChild': 'no',
+              'id': e[1]
+            })
+          }).then((data) => {
+            _this.options.find(item => item.value === e[0]).children.find(item => item.value === e[1]).children.push(...data.data.list)
+          })
+        }
       },
       handleItemChangeValue (e) {
-        if (e.length === 2) {
+        if (e.length === 3) {
           _this.questionInfo.courseTitleId = e[0]
-          _this.questionInfo.knowledgePointId = e[1]
+          _this.questionInfo.chapter = e[1]
+          _this.questionInfo.knowledgePointId = e[2]
         }
       }
     }

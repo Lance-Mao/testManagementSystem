@@ -39,6 +39,10 @@ public class QuestionPaperEntity implements Serializable {
 	 */
 	private Long knowledgePointId;
 	/**
+	 * 章节
+	 */
+	private Long chapter;
+	/**
 	 * 上传者
 	 */
 	private Long uploadBy;
@@ -118,5 +122,13 @@ public class QuestionPaperEntity implements Serializable {
 
 	public void setUploadBy(Long uploadBy) {
 		this.uploadBy = uploadBy;
+	}
+
+	public Long getChapter() {
+		return chapter;
+	}
+
+	public void setChapter(Long chapter) {
+		this.chapter = chapter;
 	}
 }

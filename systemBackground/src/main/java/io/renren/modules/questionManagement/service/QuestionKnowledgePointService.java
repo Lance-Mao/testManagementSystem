@@ -18,7 +18,6 @@ public interface QuestionKnowledgePointService extends IService<QuestionKnowledg
 
     PageUtils queryPage(Map<String, Object> params);
 
-    List<Map<String,Object>> selectByCourseTitleId(Map<String,Object> params);
-
+    List<Map<String,Object>> selectByChapterId(Map<String,Object> params);
 }
 

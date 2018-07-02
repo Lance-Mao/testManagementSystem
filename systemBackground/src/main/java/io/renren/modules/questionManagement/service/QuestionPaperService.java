@@ -17,5 +17,6 @@ import java.util.Map;
 public interface QuestionPaperService extends IService<QuestionPaperEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
 }
 

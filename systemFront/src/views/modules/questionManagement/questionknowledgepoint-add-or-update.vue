@@ -4,13 +4,13 @@
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-    <el-form-item label="课程" prop="courseTitleId">
+    <el-form-item label="课程" prop="chapter">
       <el-cascader :style="{width: '100%'}"
           placeholder="课程"
           :options="options"
           @active-item-change="handleItemChange"
           filterable
-          v-model="dataForm.courseTitleId"
+          v-model="dataForm.chapter"
         ></el-cascader>
     </el-form-item>
     <el-form-item label="知识点" prop="knowledgePoint">
@@ -34,13 +34,13 @@
         dataForm: {
           id: 0,
           knowledgePoint: '',
-          courseTitleId: null
+          chapter: null
         },
         dataRule: {
           knowledgePoint: [
             { required: true, message: '知识点不能为空', trigger: 'blur' }
           ],
-          courseTitleId: [
+          chapter: [
             { required: true, message: '课程不能为空', trigger: 'blur' }
           ]
         }
@@ -59,7 +59,7 @@
             url: this.$http.adornUrl(`/questionManagement/questioncoursetitle/lists`),
             method: 'get',
             params: this.$http.adornParams({
-              'isChild': 'no'
+              'isChild': 'yes'
             })
           }).then(data => {
             if (data && data.data.code === 0) {
@@ -75,7 +75,7 @@
               if (data && data.code === 0) {
                 console.log(data)
                 this.dataForm.knowledgePoint = data.questionKnowledgePoint.knowledgePoint
-                this.dataForm.courseTitleId = [data.questionKnowledgePoint.courseTitleId]
+                this.dataForm.chapter = [data.questionKnowledgePoint.chapter]
               }
             })
           }
@@ -91,7 +91,7 @@
               data: this.$http.adornData({
                 'id': this.dataForm.id || undefined,
                 'knowledgePoint': this.dataForm.knowledgePoint,
-                'courseTitleId': this.dataForm.courseTitleId[0]
+                'chapter': this.dataForm.chapter[0]
               })
             }).then(({data}) => {
               if (data && data.code === 0) {
@@ -112,7 +112,19 @@
         })
       },
       handleItemChange (e) {
-        _this.dataForm.courseTitleId = e
+        console.log(e[0])
+        _this.dataForm.chapter = e
+        this.$http({
+          url: this.$http.adornUrl(`questionManagement/questionpaper/lists`),
+          mothod: 'get',
+          params: {
+            'isChild': 'no',
+            'id': e[0]
+          }
+        }).then(data => {
+          console.log(data, '接收的数据')
+          _this.options.find(item => item.value === e[0].children.push(...data.data.list))
+        })
       }
     }
   }

@@ -27,9 +27,14 @@ public class QuestionKnowledgePointEntity implements Serializable {
 	 */
 	private String knowledgePoint;
 	/**
-	 * 课程名称id
+	 * 章节
 	 */
-	private Integer courseTitleId;
+	private Long chapter;
+
+	/**
+	 * 课程名称
+	 */
+	private Integer courseTitle;
 
 	/**
 	 * 创建者
@@ -60,17 +65,13 @@ public class QuestionKnowledgePointEntity implements Serializable {
 	public String getKnowledgePoint() {
 		return knowledgePoint;
 	}
-	/**
-	 * 设置：课程名称id
-	 */
-	public void setCourseTitleId(Integer courseTitleId) {
-		this.courseTitleId = courseTitleId;
+
+	public Long getChapter() {
+		return chapter;
 	}
-	/**
-	 * 获取：课程名称id
-	 */
-	public Integer getCourseTitleId() {
-		return courseTitleId;
+
+	public void setChapter(Long chapter) {
+		this.chapter = chapter;
 	}
 
 	public Long getCreator() {
@@ -79,5 +80,13 @@ public class QuestionKnowledgePointEntity implements Serializable {
 
 	public void setCreator(Long creator) {
 		this.creator = creator;
+	}
+
+	public Integer getCourseTitle() {
+		return courseTitle;
+	}
+
+	public void setCourseTitle(Integer courseTitle) {
+		this.courseTitle = courseTitle;
 	}
 }

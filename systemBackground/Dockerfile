@@ -8,4 +8,4 @@ RUN mvn package
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/app/target/app.jar"]
+ENTRYPOINT ["java","-jar","/app/target/systemBackground.jar"]

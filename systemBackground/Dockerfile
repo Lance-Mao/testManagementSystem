@@ -1,14 +1,11 @@
-FROM maven:3.5-jdk-8
+FROM maven:3.5-jdk-8-slim
 
-EXPOSE 8081
+WORKDIR /app
 
-COPY . /usr/share/maven
+COPY . /app
 
 RUN mvn package
 
-WORKDIR /root/.m2/repository
+EXPOSE 8080
 
-VOLUME /tmp
-ADD target/systemBackground.jar /app.jar
-RUN bash -c 'touch /app.jar'
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/app/target/app.jar"]

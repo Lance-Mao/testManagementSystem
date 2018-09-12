@@ -6,6 +6,8 @@ import io.renren.common.utils.R;
 import io.renren.common.utils.ResolveWordUtils;
 import io.renren.common.utils.ShiroUtils;
 import io.renren.modules.oss.cloud.OSSFactory;
+import io.renren.modules.oss.entity.SysOssEntity;
+import io.renren.modules.oss.service.SysOssService;
 import io.renren.modules.questionManagement.entity.QuestionPaperEntity;
 import io.renren.modules.questionManagement.entity.QuestionQuestionBankEntity;
 import io.renren.modules.questionManagement.service.QuestionChapterService;
@@ -17,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 
 /**
@@ -40,10 +39,7 @@ public class QuestionPaperController {
     private QuestionQuestionBankService questionQuestionBankService;
 
     @Autowired
-    private QuestionKnowledgePointService questionKnowledgePointService;
-
-    @Autowired
-    private QuestionChapterService questionChapterService;
+    private SysOssService sysOssService;
 
     /**
      * 列表
@@ -58,7 +54,7 @@ public class QuestionPaperController {
 
 
     /**
-     * 试题上传
+     * 试题上传==文件
      */
     @PostMapping("/upload")
     @RequiresPermissions("questionManagement:questionpaper:upload")
@@ -88,6 +84,29 @@ public class QuestionPaperController {
 
         return R.ok().put("url", url);
     }
+
+    /**
+     * 图片上传==试题相关
+     */
+    @PostMapping("/uploadTestPicture")
+    public R uploadTestPicture(@RequestParam("file") MultipartFile file) throws Exception {
+        if (file.isEmpty()) {
+            throw new RRException("上传文件不能为空");
+        }
+
+        //上传文件
+        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        String url = Objects.requireNonNull(OSSFactory.build()).uploadSuffix(file.getBytes(), suffix);
+
+        //保存文件信息
+        SysOssEntity ossEntity = new SysOssEntity();
+        ossEntity.setUrl(url);
+        ossEntity.setCreateDate(new Date());
+        sysOssService.insert(ossEntity);
+
+        return R.ok().put("url", url);
+    }
+
 
     /**
      * 信息

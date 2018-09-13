@@ -5,10 +5,9 @@ WORKDIR /app
 
 COPY . ${WORKDIR}
 
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org \
-    && cnpm install \
+RUN  npm install \
     && npm run build \
-    && cnpm install -g serve
+    && npm install -g serve
 
 WORKDIR /app/dist
 

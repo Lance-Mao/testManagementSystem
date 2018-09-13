@@ -12,6 +12,6 @@ RUN npm install -g cnpm --registry=https://registry.npm.taobao.org \
 
 WORKDIR /app/dist
 
-EXPOSE 5000
+EXPOSE 8001
 
 ENTRYPOINT [ "serve", "-s" ]

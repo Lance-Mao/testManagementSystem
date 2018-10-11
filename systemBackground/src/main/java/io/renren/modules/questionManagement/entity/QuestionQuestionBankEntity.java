@@ -50,70 +50,59 @@ public class QuestionQuestionBankEntity implements Serializable {
 	 * 题目描述
 	 */
 	private String titleDescription;
-	/**
-	 * 答案
-	 */
-	private String answer;
-	/**
-	 * 选项A
-	 */
-	private String answerA;
-	/**
-	 * 选项B
-	 */
-	private String answerB;
-	/**
-	 * 选项C
-	 */
-	private String answerC;
-	/**
-	 * 选项D
-	 */
-	private String answerD;
-	/**
-	 * 选项E
-	 */
-	private String answerE;
-	/**
-	 * 选项F
-	 */
-	private String answerF;
 
 	/**
-	 * 设置：id
+	 * 选项
 	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private String options;
+
 	/**
-	 * 获取：id
+	 * 正确答案解析
 	 */
+	private String correctAnswerAnalysis;
+
+	/**
+	 * 错误答案解析
+	 */
+	private String wrongAnswerAnalysis;
+
+	/**
+	 * 难易度
+	 */
+	private Integer degreeOfDifficulty;
+
+	/**
+	 * 题目相关信息
+	 */
+	private String titleRelatedInformation;
+
+	/**
+	 * 正确答案
+	 */
+	private String correctAnswer;
+
 	public Long getId() {
 		return id;
 	}
-	/**
-	 * 设置：课程名称
-	 */
-	public void setCourseTitleId(Integer courseTitleId) {
-		this.courseTitleId = courseTitleId;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
-	/**
-	 * 获取：课程名称
-	 */
+
 	public Integer getCourseTitleId() {
 		return courseTitleId;
 	}
-	/**
-	 * 设置：知识点
-	 */
-	public void setKnowledgeTitleId(Long knowledgeTitleId) {
-		this.knowledgeTitleId = knowledgeTitleId;
+
+	public void setCourseTitleId(Integer courseTitleId) {
+		this.courseTitleId = courseTitleId;
 	}
-	/**
-	 * 获取：知识点
-	 */
+
 	public Long getKnowledgeTitleId() {
 		return knowledgeTitleId;
+	}
+
+	public void setKnowledgeTitleId(Long knowledgeTitleId) {
+		this.knowledgeTitleId = knowledgeTitleId;
 	}
 
 	public String getQuestionType() {
@@ -124,136 +113,83 @@ public class QuestionQuestionBankEntity implements Serializable {
 		this.questionType = questionType;
 	}
 
-	/**
-	 * 设置：录入者
-	 */
-	public void setEnterer(Long enterer) {
-		this.enterer = enterer;
-	}
-	/**
-	 * 获取：录入者
-	 */
 	public Long getEnterer() {
 		return enterer;
 	}
-	/**
-	 * 设置：录入时间
-	 */
-	public void setEntryTime(Date entryTime) {
-		this.entryTime = entryTime;
+
+	public void setEnterer(Long enterer) {
+		this.enterer = enterer;
 	}
-	/**
-	 * 获取：录入时间
-	 */
+
 	public Date getEntryTime() {
 		return entryTime;
 	}
-	/**
-	 * 设置：更新时间
-	 */
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
+
+	public void setEntryTime(Date entryTime) {
+		this.entryTime = entryTime;
 	}
-	/**
-	 * 获取：更新时间
-	 */
+
 	public Date getUpdateTime() {
 		return updateTime;
 	}
-	/**
-	 * 设置：题目描述
-	 */
-	public void setTitleDescription(String titleDescription) {
-		this.titleDescription = titleDescription;
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
-	/**
-	 * 获取：题目描述
-	 */
+
 	public String getTitleDescription() {
 		return titleDescription;
 	}
-	/**
-	 * 设置：答案
-	 */
-	public void setAnswer(String answer) {
-		this.answer = answer;
+
+	public void setTitleDescription(String titleDescription) {
+		this.titleDescription = titleDescription;
 	}
-	/**
-	 * 获取：答案
-	 */
-	public String getAnswer() {
-		return answer;
+
+	public String getOptions() {
+		return options;
 	}
-	/**
-	 * 设置：选项A
-	 */
-	public void setAnswerA(String answerA) {
-		this.answerA = answerA;
+
+	public void setOptions(String options) {
+		this.options = options;
 	}
-	/**
-	 * 获取：选项A
-	 */
-	public String getAnswerA() {
-		return answerA;
+
+	public String getCorrectAnswerAnalysis() {
+		return correctAnswerAnalysis;
 	}
-	/**
-	 * 设置：选项B
-	 */
-	public void setAnswerB(String answerB) {
-		this.answerB = answerB;
+
+	public void setCorrectAnswerAnalysis(String correctAnswerAnalysis) {
+		this.correctAnswerAnalysis = correctAnswerAnalysis;
 	}
-	/**
-	 * 获取：选项B
-	 */
-	public String getAnswerB() {
-		return answerB;
+
+	public String getWrongAnswerAnalysis() {
+		return wrongAnswerAnalysis;
 	}
-	/**
-	 * 设置：选项C
-	 */
-	public void setAnswerC(String answerC) {
-		this.answerC = answerC;
+
+	public void setWrongAnswerAnalysis(String wrongAnswerAnalysis) {
+		this.wrongAnswerAnalysis = wrongAnswerAnalysis;
 	}
-	/**
-	 * 获取：选项C
-	 */
-	public String getAnswerC() {
-		return answerC;
+
+	public Integer getDegreeOfDifficulty() {
+		return degreeOfDifficulty;
 	}
-	/**
-	 * 设置：选项D
-	 */
-	public void setAnswerD(String answerD) {
-		this.answerD = answerD;
+
+	public void setDegreeOfDifficulty(Integer degreeOfDifficulty) {
+		this.degreeOfDifficulty = degreeOfDifficulty;
 	}
-	/**
-	 * 获取：选项D
-	 */
-	public String getAnswerD() {
-		return answerD;
+
+	public String getTitleRelatedInformation() {
+		return titleRelatedInformation;
 	}
-	/**
-	 * 设置：选项E
-	 */
-	public void setAnswerE(String answerE) {
-		this.answerE = answerE;
+
+	public void setTitleRelatedInformation(String titleRelatedInformation) {
+		this.titleRelatedInformation = titleRelatedInformation;
 	}
-	/**
-	 * 获取：选项E
-	 */
-	public String getAnswerE() {
-		return answerE;
+
+	public String getCorrectAnswer() {
+		return correctAnswer;
 	}
-	/**
-	 * 设置：选项F
-	 */
-	public void setAnswerF(String answerF) {
-		this.answerF = answerF;
-	}
-	/**
-	 * 获取：选项F
-	 */
-	public String getAnswerF() {
-		return answerF;
+
+	public void setCorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
 	}
 }

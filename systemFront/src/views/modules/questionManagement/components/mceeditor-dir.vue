@@ -1,6 +1,11 @@
 <template>
   <div>
-    <textarea :id= "Id"></textarea>
+    <!-- 题干 -->
+    <el-row>
+      <el-col :span="24">
+        <textarea :id= "Id"></textarea>
+      </el-col>
+    </el-row>
   </div>
 </template>
 <script>
@@ -8,17 +13,18 @@
   export default {
     name: 'mceeditor',
     data () {
-      const Id = Date.now()
+      const Id = Date.now() * Math.ceil(Math.random() * 1000)
       return {
         Id: Id,
         Editor: null,
         DefaultConfig: {
           // GLOBAL
           language: 'zh_CN',
-          height: 500,
+          height: 200,
           theme: 'modern',
           menubar: false,
-          toolbar: `styleselect | fontselect | formatselect | fontsizeselect | forecolor backcolor | bold italic underline strikethrough | image  media | table | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | preview removeformat  hr | paste code  link | undo redo | fullscreen `,
+          // toolbar: `styleselect | fontselect | formatselect | fontsizeselect | forecolor backcolor | bold italic underline strikethrough | image  media | table | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | preview removeformat  hr | paste code  link | undo redo | fullscreen `,
+          toolbar: `fontsizeselect | forecolor backcolor | bold italic underline strikethrough | image | table | outdent indent | numlist bullist | preview removeformat  hr | undo redo `,
           plugins: `
             paste
             importcss
@@ -136,7 +142,7 @@
         default: () => {
           return {
             theme: 'modern',
-            height: 300
+            height: 200
           }
         }
       },
@@ -145,7 +151,7 @@
         type: String
       },
       accept: {
-        default: ['image/jpeg', 'image/png'],
+        default: 'image/jpeg,image/png',
         type: String
       },
       maxSize: {
@@ -163,24 +169,29 @@
     beforeDestroy () {
       // 销毁tinymce
       this.$emit('on-destroy')
-      window.tinymce.remove(`$#{this.Id}`)
+      window.tinymce.remove(`#${this.Id}`)
+    },
+    watch: {
+      value (val) {
+        // debugger
+        // window.tinymce.activeEditor.setContent(val)
+      }
     },
     methods: {
       init () {
         const self = this
-  
         this.Editor = window.tinymce.init({
+          branding: false,
           // 默认配置
           ...this.DefaultConfig,
   
           // 图片上传
           images_upload_handler: function (blobInfo, success, failure) {
-            console.log('blobInfo我被调用了')
             if (blobInfo.blob().size > self.maxSize) {
               failure('文件体积过大')
             }
             // blobInfo.blob() 图片相关信息
-            if (self.accept.includes(blobInfo.blob().type)) {
+            if (self.accept.split(',').includes(blobInfo.blob().type)) {
               uploadPic(blobInfo.blob())
             } else {
               failure('图片格式错误')
@@ -199,9 +210,6 @@
                 config
               ).then(data => {
                 if (data.status === 200) {
-                  // self.$emit('on-upload-success', [
-                  //   data, success, failure
-                  // ])
                   console.log(data)
                   success(data.data.url)
                 }

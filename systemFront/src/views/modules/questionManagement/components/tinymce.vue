@@ -32,7 +32,9 @@ export default {
         plugins: 'link lists image code table colorpicker textcolor wordcount contextmenu',
         toolbar:
           'bold italic underline strikethrough | fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | undo redo | link unlink image code | removeformat',
-        branding: false
+        branding: false,
+        selector: 'div#editable',
+        inline: true
       }
     }
   },

@@ -48,13 +48,13 @@ public class QuestionQuestionBankServiceImpl extends ServiceImpl<QuestionQuestio
             mapList = (List<Map<String, Object>>) map.get("questionDetails");
             for (Map<String, Object> map_o : mapList) {
                 questionQuestionBankEntity.setTitleDescription(map_o.get("content").toString());
-                questionQuestionBankEntity.setAnswer(map_o.get("answer").toString());
-                questionQuestionBankEntity.setAnswerA(map_o.get("answer_A").toString());
-                questionQuestionBankEntity.setAnswerB(map_o.get("answer_B").toString());
-                questionQuestionBankEntity.setAnswerC(map_o.get("answer_C").toString());
-                questionQuestionBankEntity.setAnswerD(map_o.get("answer_D").toString());
-                questionQuestionBankEntity.setAnswerE(map_o.get("answer_E").toString());
-                questionQuestionBankEntity.setAnswerF(map_o.get("answer_F").toString());
+//                questionQuestionBankEntity.setAnswer(map_o.get("answer").toString());
+//                questionQuestionBankEntity.setAnswerA(map_o.get("answer_A").toString());
+//                questionQuestionBankEntity.setAnswerB(map_o.get("answer_B").toString());
+//                questionQuestionBankEntity.setAnswerC(map_o.get("answer_C").toString());
+//                questionQuestionBankEntity.setAnswerD(map_o.get("answer_D").toString());
+//                questionQuestionBankEntity.setAnswerE(map_o.get("answer_E").toString());
+//                questionQuestionBankEntity.setAnswerF(map_o.get("answer_F").toString());
                 bankDataList.add(questionQuestionBankEntity);
             }
         }

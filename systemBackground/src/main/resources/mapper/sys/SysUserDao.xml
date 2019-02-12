@@ -30,7 +30,7 @@
 		left join tb_region_province p on p.provinceID = c.provinceID
 		<where>
 			<if test="page.username != ''">
-				u.username = #{page.username}
+				and u.username = #{page.username}
 			</if>
 		</where>
 		LIMIT #{page.page},#{page.limit}
